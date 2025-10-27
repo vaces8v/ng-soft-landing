@@ -1,0 +1,17 @@
+User-agent: *
+Allow: /
+
+Disallow: /admin/
+Disallow: /api/
+
+Allow: /about
+Allow: /blog
+Allow: /careers
+Allow: /faq
+Allow: /portfolio
+Allow: /projects
+Allow: /privacy
+Allow: /terms
+Allow: /cookies
+
+Sitemap: https://ng-soft.ru/sitemap.xml

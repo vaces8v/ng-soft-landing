@@ -1,103 +1,238 @@
-import Image from "next/image";
+
+import { Icon } from '@iconify/react';
+import Link from 'next/link';
+import { Suspense } from 'react';
+import dynamic from 'next/dynamic';
+import { Button } from '@/components/ui/button';
+import { Header } from '@/components/header';
+import { FloatingPaths } from '@/components/FloatingPaths';
+import { Footer } from '@/components/footer';
+// Все секции динамические для оптимизации
+
+const WebDevelopmentSection = dynamic(
+  () => import('@/components/sections/web-development-section').then(mod => ({ default: mod.WebDevelopmentSection })),
+  { loading: () => <SectionLoader /> }
+);
+
+const EnterpriseSoftwareSection = dynamic(
+  () => import('@/components/sections/enterprise-software-section').then(mod => ({ default: mod.EnterpriseSoftwareSection })),
+  { loading: () => <SectionLoader /> }
+);
+
+const MobileDevelopmentSection = dynamic(
+  () => import('@/components/sections/mobile-development-section').then(mod => ({ default: mod.MobileDevelopmentSection })),
+  { loading: () => <SectionLoader /> }
+);
+
+const CloudSolutionsSection = dynamic(
+  () => import('@/components/sections/cloud-solutions-section').then(mod => ({ default: mod.CloudSolutionsSection })),
+  { loading: () => <SectionLoader /> }
+);
+
+const UIDesignSection = dynamic(
+  () => import('@/components/sections/ui-design-section').then(mod => ({ default: mod.UIDesignSection })),
+  { loading: () => <SectionLoader /> }
+);
+
+const ChatbotSection = dynamic(
+  () => import('@/components/sections/chatbot-section').then(mod => ({ default: mod.ChatbotSection })),
+  { loading: () => <SectionLoader /> }
+);
+
+const ContactSection = dynamic(
+  () => import('@/components/sections/contact-section').then(mod => ({ default: mod.ContactSection })),
+  { loading: () => <SectionLoader /> }
+);
+
+const ServicesSection = dynamic(
+  () => import('@/components/sections/services-section').then(mod => ({ default: mod.ServicesSection })),
+  { loading: () => <SectionLoader /> }
+);
+
+function SectionLoader() {
+  return (
+    <section className="py-24 bg-white dark:bg-neutral-950">
+      <div className="container mx-auto px-4 md:px-6">
+        <div className="animate-pulse space-y-8">
+          <div className="h-12 bg-neutral-200 dark:bg-neutral-800 rounded-lg w-1/3 mx-auto" />
+          <div className="h-6 bg-neutral-200 dark:bg-neutral-800 rounded-lg w-2/3 mx-auto" />
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
+            {[1, 2, 3].map((i) => (
+              <div key={i} className="h-64 bg-neutral-200 dark:bg-neutral-800 rounded-xl" />
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+
 
 export default function Home() {
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <>
+      {/* Header */}
+      <Header />
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+      <main className="relative min-h-screen w-full overflow-hidden bg-white dark:bg-neutral-950">
+
+        {/* Hero Section */}
+        <section className="relative min-h-screen flex items-center justify-center pt-16">
+          {/* Animated Background */}
+          <div className="sm:block hidden absolute inset-0">
+            <FloatingPaths position={1} />
+            <FloatingPaths position={-1} />
+          </div>
+
+          {/* Content */}
+          <div className="relative z-10 container mx-auto px-4 md:px-6 text-center">
+            <div
+              className="max-w-5xl mx-auto space-y-4 sm:space-y-6 md:space-y-8"
+            >
+              {/* Badge */}
+              <div
+                className="inline-block"
+              >
+                <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 rounded-full bg-gradient-to-r from-neutral-100 to-neutral-200 dark:from-neutral-800 dark:to-neutral-900 border border-neutral-300 dark:border-neutral-700">
+                  <Icon icon="lucide:sparkles" className="h-4 w-4 flex-shrink-0" />
+                  <span className="text-xs sm:text-sm font-medium">Инновационные решения для бизнеса</span>
+                </div>
+              </div>
+
+              {/* Main Title - LCP Element */}
+              <h1
+                className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold tracking-tight"
+              >
+                <span className="inline-block bg-clip-text text-transparent bg-gradient-to-b from-neutral-900 via-neutral-800 to-neutral-600 dark:from-white dark:via-neutral-200 dark:to-neutral-400">
+                  Создаем будущее
+                </span>
+                <br />
+                <span className="inline-block bg-clip-text text-transparent bg-gradient-to-b from-neutral-800 via-neutral-700 to-neutral-500 dark:from-neutral-200 dark:via-neutral-300 dark:to-neutral-500">
+                  вашего бизнеса
+                </span>
+              </h1>
+
+              {/* Description */}
+              <p
+                className="text-sm sm:text-base md:text-lg lg:text-xl text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto"
+              >
+                Разрабатываем высококачественные программные решения,
+                которые помогают компаниям достигать своих целей
+              </p>
+
+              {/* CTA Buttons */}
+              <div
+                className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4"
+              >
+                <Button
+                  asChild
+                  size="lg"
+                  className="group relative overflow-hidden bg-neutral-900 hover:bg-neutral-800 dark:bg-white dark:hover:bg-neutral-100 text-white dark:text-neutral-900 px-6 sm:px-8 py-5 sm:py-6 text-sm sm:text-base"
+                >
+                  <Link href="#contact">
+                    Начать проект
+                    <Icon icon="lucide:arrow-right" className="ml-2 h-4 sm:h-5 w-4 sm:w-5 transition-transform group-hover:translate-x-1" />
+                  </Link>
+                </Button>
+
+                <Button
+                  asChild
+                  size="lg"
+                  variant="outline"
+                  className="group border-neutral-300 dark:border-neutral-700 hover:bg-neutral-100 dark:hover:bg-neutral-900 px-6 sm:px-8 py-5 sm:py-6 text-sm sm:text-base"
+                >
+                  <Link href="#services">
+                    Наши услуги
+                    <Icon icon="lucide:chevron-down" className="ml-2 h-4 sm:h-5 w-4 sm:w-5 transition-transform group-hover:translate-y-1" />
+                  </Link>
+                </Button>
+              </div>
+
+              {/* Stats */}
+              <div
+                className="grid grid-cols-3 gap-4 sm:gap-6 md:gap-8 max-w-3xl mx-auto pt-8 sm:pt-12"
+              >
+                {[
+                  { number: '50+', label: 'Проектов' },
+                  { number: '30+', label: 'Клиентов' },
+                  { number: '5+', label: 'Лет опыта' },
+                ].map((stat, index) => (
+                  <div key={index} className="text-center">
+                    <div className="text-2xl sm:text-3xl md:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-neutral-900 to-neutral-600 dark:from-white dark:to-neutral-400">
+                      {stat.number}
+                    </div>
+                    <div className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 mt-1">
+                      {stat.label}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Scroll Indicator */}
+          <div
+            className="absolute bottom-8 left-1/2 -translate-x-1/2"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+            <div
+              className="animate-bounce"
+            >
+              <Icon icon="lucide:chevron-down" className="h-6 w-6 text-neutral-400" />
+            </div>
+          </div>
+        </section>
+
+        {/* Web Development Section */}
+        <div id="web-development">
+          <WebDevelopmentSection />
         </div>
+
+        {/* Mobile Development Section */}
+        <div id="mobile-development">
+          <MobileDevelopmentSection />
+        </div>
+
+        {/* Cloud Solutions Section */}
+        <Suspense fallback={<SectionLoader />}>
+          <div id="cloud-solutions">
+            <CloudSolutionsSection />
+          </div>
+        </Suspense>
+
+        {/* Enterprise Software Section */}
+        <div id="enterprise-software">
+          <EnterpriseSoftwareSection />
+        </div>
+
+        {/* UI Design Section */}
+        <Suspense fallback={<SectionLoader />}>
+          <div id="ui-design">
+            <UIDesignSection />
+          </div>
+        </Suspense>
+
+        {/* Chatbot Section */}
+        <Suspense fallback={<SectionLoader />}>
+          <div id="chatbot">
+            <ChatbotSection />
+          </div>
+        </Suspense>
+
+        {/* Contact Section */}
+        <Suspense fallback={<SectionLoader />}>
+          <div id="contact">
+            <ContactSection />
+          </div>
+        </Suspense>
+
+        {/* Services Section */}
+        <Suspense fallback={<SectionLoader />}>
+          <ServicesSection />
+        </Suspense>
       </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+
+      <Footer />
+    </>
   );
 }
