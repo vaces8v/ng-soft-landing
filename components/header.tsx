@@ -68,12 +68,10 @@ export function Header() {
   const router = useRouter();
   const pathname = usePathname();
 
-  // Обработка прокрутки к якорю при загрузке/изменении pathname
   useEffect(() => {
     if (pathname === '/') {
       const hash = window.location.hash;
       if (hash) {
-        // Небольшая задержка для рендеринга контента
         const timer = setTimeout(() => {
           const element = document.querySelector(hash);
           if (element) {
@@ -93,21 +91,17 @@ export function Header() {
   }, [pathname]);
 
   const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    // Извлекаем путь и якорь из href
     const [path, hash] = href.split('#');
     const targetPath = path || '/';
     
-    // Если мы не на целевой странице, позволяем браузеру перейти по ссылке
     if (pathname !== targetPath) {
-      // Не вызываем preventDefault, позволяя Next.js обработать переход
       return;
     }
     
-    // Если мы на целевой странице, делаем плавную прокрутку
     e.preventDefault();
     const element = document.querySelector('#' + hash);
     if (element) {
-      const offset = 80; // Header height
+      const offset = 80;
       const elementPosition = element.getBoundingClientRect().top;
       const offsetPosition = elementPosition + window.pageYOffset - offset;
 
@@ -122,7 +116,6 @@ export function Header() {
     <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-white/80 dark:bg-neutral-950/80 border-b border-neutral-200 dark:border-neutral-800">
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex items-center justify-between h-16">
-          {/* Logo */}
           <div className="flex items-center gap-2"
           >
             <Link href="/" className="flex items-center gap-[6px] group">
@@ -136,12 +129,10 @@ export function Header() {
             </Link>
           </div>
 
-          {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center gap-6"
           >
             <NavigationMenu>
               <NavigationMenuList>
-                {/* Services Dropdown */}
                 <NavigationMenuItem>
                   <NavigationMenuTrigger className="bg-transparent hover:bg-neutral-100 dark:hover:bg-neutral-800 flex items-center">
                     <Icon icon="lucide:grid-3x3" className="h-4 w-4 mr-2" />
@@ -185,7 +176,6 @@ export function Header() {
                   </NavigationMenuContent>
                 </NavigationMenuItem>
 
-                {/* Other Links */}
                 <NavigationMenuItem>
                   <NavigationMenuLink asChild>
                     <Link
@@ -225,10 +215,8 @@ export function Header() {
               </NavigationMenuList>
             </NavigationMenu>
 
-            {/* Theme Toggle */}
             <ThemeToggle />
 
-            {/* CTA Button */}
             <Link
               href="#contact"
               onClick={(e) => scrollToSection(e, '#contact')}
@@ -238,7 +226,6 @@ export function Header() {
             </Link>
           </div>
 
-          {/* Mobile Navigation */}
           <div className="flex lg:hidden items-center gap-3"
           >
             <ThemeToggle />
@@ -263,7 +250,6 @@ export function Header() {
                 </SheetHeader>
 
                 <div className="flex flex-col gap-6 mt-8 overflow-y-auto flex-1 pr-2">
-                  {/* Services */}
                   <div>
                     <h3 className="text-sm font-semibold text-neutral-600 dark:text-neutral-400 mb-3 px-2">
                       Услуги
@@ -295,7 +281,6 @@ export function Header() {
                     </div>
                   </div>
 
-                  {/* Other Links */}
                   <div className="space-y-1 border-t border-neutral-200 dark:border-neutral-800 pt-4">
                     <Link
                       href="/projects"
@@ -326,7 +311,6 @@ export function Header() {
                     </a>
                   </div>
 
-                  {/* CTA Button */}
                   <Link
                     href="#contact"
                     onClick={(e) => {

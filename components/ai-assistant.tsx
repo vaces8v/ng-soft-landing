@@ -261,7 +261,7 @@ export function AIAssistant() {
       clearFaqTimers();
     }
     setIsLoading(true);
-    setIsWaitingResponse(true); // Показываем лоадер
+    setIsWaitingResponse(true);
 
     try {
       const response = await fetch('/api/chat', {
@@ -348,7 +348,7 @@ export function AIAssistant() {
         ...prev,
         {
           role: 'assistant',
-          content: `Извините, произошла ошибка: ${errorMessage}\n\n🔧 Проверьте:\n• API ключ GROQ_API_KEY в .env\n• Интернет соединение\n• Консоль браузера (F12) для деталей`,
+          content: `Извините, произошла ошибка: ${errorMessage}\n\n🔧 Проверьте:\n• Интернет соединение\n• Консоль браузера (F12) для деталей`,
           timestamp: new Date(),
         },
       ]);

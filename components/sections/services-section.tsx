@@ -7,7 +7,7 @@ const services: CardType[] = [
   {
     category: "Веб-технологии",
     title: "Веб-разработка",
-    src: "https://images.unsplash.com/photo-1547658719-da2b51169166?q=80&w=1000&auto=format&fit=crop",
+    src: "",
     icon: <Icon icon="lucide:code-2" className="h-7 w-7 text-neutral-700 dark:text-neutral-300" />,
     description: "Создаем ориентированные на пользователя и адаптивные веб-решения, которые соответствуют требованиям вашего бизнеса",
     link: "#web-development",
@@ -55,7 +55,7 @@ const services: CardType[] = [
   {
     category: "Мобильная разработка",
     title: "Мобильные приложения",
-    src: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?q=80&w=1000&auto=format&fit=crop",
+    src: "",
     icon: <Icon icon="lucide:smartphone" className="h-7 w-7 text-neutral-700 dark:text-neutral-300" />,
     description: "Разработка нативных и кроссплатформенных мобильных приложений для iOS и Android с современным дизайном",
     link: "#mobile-development",
@@ -103,7 +103,7 @@ const services: CardType[] = [
   {
     category: "Облачная инфраструктура",
     title: "Облачные решения",
-    src: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1000&auto=format&fit=crop",
+    src: "",
     icon: <Icon icon="lucide:cloud" className="h-7 w-7 text-neutral-700 dark:text-neutral-300" />,
     description: "Миграция, развертывание и поддержка облачной инфраструктуры с круглосуточным мониторингом",
     link: "#cloud-solutions",
@@ -151,7 +151,7 @@ const services: CardType[] = [
   {
     category: "Дизайн",
     title: "UI/UX Дизайн",
-    src: "https://images.unsplash.com/photo-1561070791-2526d30994b5?q=80&w=1000&auto=format&fit=crop",
+    src: "",
     icon: <Icon icon="lucide:palette" className="h-7 w-7 text-neutral-700 dark:text-neutral-300" />,
     description: "Создание современного, интуитивного и привлекательного дизайна с фокусом на пользовательский опыт",
     link: "#ui-design",
@@ -199,7 +199,7 @@ const services: CardType[] = [
   {
     category: "Корпоративные системы",
     title: "Корпоративное ПО",
-    src: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1000&auto=format&fit=crop",
+    src: "",
     icon: <Icon icon="lucide:briefcase" className="h-7 w-7 text-neutral-700 dark:text-neutral-300" />,
     description: "Разработка корпоративного программного обеспечения для автоматизации бизнес-процессов",
     link: "#enterprise-software",
@@ -247,7 +247,7 @@ const services: CardType[] = [
   {
     category: "Искусственный интеллект",
     title: "AI Чат-боты",
-    src: "https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=1000&auto=format&fit=crop",
+    src: "",
     icon: <Icon icon="lucide:bot" className="h-7 w-7 text-neutral-700 dark:text-neutral-300" />,
     description: "Разработка умных чат-ботов с использованием искусственного интеллекта для автоматизации поддержки",
     link: "#chatbot",

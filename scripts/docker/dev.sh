@@ -54,7 +54,6 @@ start_postgres() {
             postgres:16-alpine
     fi
     
-    # Ждем готовности базы данных
     echo "Ожидание готовности базы данных..."
     sleep 3
     
@@ -119,7 +118,6 @@ clean_postgres() {
         print_success "Контейнер удален"
     fi
     
-    # Удаляем volume
     if [ "$(docker volume ls -q -f name=$VOLUME_NAME)" ]; then
         read -p "Удалить данные базы данных? (y/N): " -n 1 -r
         echo

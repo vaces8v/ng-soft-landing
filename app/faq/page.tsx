@@ -86,7 +86,6 @@ const faqs = [
 ] as const;
 
 export default function FAQPage() {
-  // Подготовка данных для FAQ структурированных данных
   const allFAQs = faqs.flatMap(category => 
     category.questions.map(q => ({
       question: q.question,

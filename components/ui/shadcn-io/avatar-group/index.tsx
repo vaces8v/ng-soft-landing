@@ -12,10 +12,8 @@ import {
 } from '@/components/ui/tooltip';
 import * as TooltipPrimitive from '@radix-ui/react-tooltip';
 
-// Define types based on components
 type TooltipContentProps = React.ComponentProps<typeof TooltipContent>;
 
-// Avatar Container for motion-based interactions
 type AvatarMotionProps = {
   children: React.ReactNode;
   zIndex: number;
@@ -57,7 +55,6 @@ function AvatarMotionContainer({
   );
 }
 
-// Avatar Container for CSS-based interactions
 type AvatarCSSProps = {
   children: React.ReactNode;
   zIndex: number;
@@ -91,7 +88,6 @@ function AvatarCSSContainer({
   );
 }
 
-// Avatar Container for stack variant with mask
 type AvatarStackItemProps = {
   children: React.ReactNode;
   index: number;
@@ -135,7 +131,6 @@ type AvatarGroupProps = Omit<React.ComponentProps<'div'>, 'translate'> & {
   invertOverlap?: boolean;
   translate?: string | number;
   tooltipProps?: Partial<TooltipContentProps>;
-  // Stack-specific props
   animate?: boolean;
   size?: number;
 };
@@ -153,7 +148,6 @@ function AvatarGroup({
   size = 40,
   ...props
 }: AvatarGroupProps) {
-  // Stack variant
   if (variant === 'stack') {
     return (
       <div
@@ -184,7 +178,6 @@ function AvatarGroup({
     );
   }
 
-  // Motion and CSS variants with tooltips
   return (
     <TooltipProvider delayDuration={0}>
       <div

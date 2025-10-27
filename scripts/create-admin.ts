@@ -28,7 +28,6 @@ async function createAdmin() {
       process.exit(1);
     }
 
-    // Проверяем, существует ли уже пользователь с таким email
     const existingUser = await prisma.user.findUnique({
       where: { email },
     });
@@ -38,10 +37,8 @@ async function createAdmin() {
       process.exit(1);
     }
 
-    // Хешируем пароль
     const hashedPassword = await hash(password, 10);
 
-    // Создаем администратора
     const admin = await prisma.user.create({
       data: {
         name,

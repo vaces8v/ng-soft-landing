@@ -44,10 +44,9 @@ const colors = [
     background: 'bg-sky-50',
   },
 ];
-// Helper function to generate random position
 const getRandomPosition = () => ({
-  x: Math.floor(Math.random() * 80) + 10, // Keep within 10-90% range
-  y: Math.floor(Math.random() * 80) + 10, // Keep within 10-90% range
+  x: Math.floor(Math.random() * 80) + 10,
+  y: Math.floor(Math.random() * 80) + 10,
 });
 const Example = () => {
   const [user1Position, setUser1Position] = useState({

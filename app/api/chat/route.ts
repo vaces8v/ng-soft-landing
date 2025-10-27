@@ -112,17 +112,19 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Проверяем наличие API ключа Groq
-    const apiKey = process.env.GROQ_API_KEY;
+    const openrouterKey = process.env.OPENROUTER_API_KEY;
+    const groqKey = process.env.GROQ_API_KEY;
 
-    if (!apiKey) {
+    if (!openrouterKey && !groqKey) {
       return NextResponse.json(
-        { error: 'GROQ_API_KEY not configured. Add it to .env file.' },
+        { error: 'API key not configured. Add OPENROUTER_API_KEY or GROQ_API_KEY to .env file.' },
         { status: 500 }
       );
     }
 
-    // Формируем сообщения для API
+    const useOpenRouter = !!openrouterKey;
+    const apiKey = useOpenRouter ? openrouterKey : groqKey;
+
     const messages = [
       { role: 'system', content: COMPANY_CONTEXT },
       ...history.map((msg: any) => ({
@@ -132,15 +134,30 @@ export async function POST(req: NextRequest) {
       { role: 'user', content: message },
     ];
 
-    // Вызываем Groq API с streaming
-    const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+    const apiUrl = useOpenRouter 
+      ? 'https://openrouter.ai/api/v1/chat/completions'
+      : 'https://api.groq.com/openai/v1/chat/completions';
+    
+    const model = useOpenRouter
+      ? 'meta-llama/llama-3.3-70b-instruct'
+      : 'llama-3.3-70b-versatile';
+
+    const headers: Record<string, string> = {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${apiKey}`,
+    };
+
+    if (useOpenRouter) {
+      headers['HTTP-Referer'] = process.env.NEXT_PUBLIC_SITE_URL || 'https://ng-soft.ru';
+      headers['X-Title'] = 'NG-Soft AI Assistant';
+    }
+
+    // streaming
+    const response = await fetch(apiUrl, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${apiKey}`,
-      },
+      headers,
       body: JSON.stringify({
-        model: 'llama-3.3-70b-versatile',
+        model,
         messages,
         temperature: 0.3,
         top_p: 0.9,
@@ -150,7 +167,8 @@ export async function POST(req: NextRequest) {
 
     if (!response.ok) {
       const error = await response.text();
-      console.error('Groq API error:', {
+      const provider = useOpenRouter ? 'OpenRouter' : 'Groq';
+      console.error(`${provider} API error:`, {
         status: response.status,
         statusText: response.statusText,
         error,
@@ -159,12 +177,12 @@ export async function POST(req: NextRequest) {
         { 
           error: 'Failed to get AI response',
           details: response.statusText,
+          provider,
         },
         { status: response.status }
       );
     }
 
-    // Создаем readable stream для клиента
     const encoder = new TextEncoder();
     const stream = new ReadableStream({
       async start(controller) {

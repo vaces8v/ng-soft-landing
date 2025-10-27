@@ -34,7 +34,6 @@ export function CookieConsent() {
   useEffect(() => {
     const consent = localStorage.getItem('cookie-consent');
     if (!consent) {
-      // Show banner after a short delay
       const timer = setTimeout(() => setShowBanner(true), 1000);
       return () => clearTimeout(timer);
     }
@@ -69,7 +68,7 @@ export function CookieConsent() {
   };
 
   const togglePreference = (key: keyof CookiePreferences) => {
-    if (key === 'necessary') return; // Necessary cookies cannot be disabled
+    if (key === 'necessary') return;
     setPreferences((prev) => ({
       ...prev,
       [key]: !prev[key],
@@ -90,7 +89,7 @@ export function CookieConsent() {
               stiffness: 300,
               damping: 30,
             }}
-            className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 w-[90%] max-w-xl"
+            className="fixed bottom-6 left-1/2 -translate-x-1/2 z-[1000] w-[90%] max-w-xl"
           >
             <div className="relative overflow-hidden rounded-full border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-950 shadow-lg">
               <div className="px-6 py-3">

@@ -167,75 +167,48 @@ export function CloudSolutionsSection() {
                 <CloudIcon icon="lucide:globe" label="CDN" />
               </div>
 
-              {/* Animated Beams */}
+              {/* Static Beams - Monochrome style */}
               <AnimatedBeam
                 containerRef={containerRef}
                 fromRef={clientRef}
                 toRef={apiGatewayRef}
                 curvature={0}
-                gradientStartColor="#3b82f6"
-                gradientStopColor="#8b5cf6"
-                duration={30}
               />
               <AnimatedBeam
                 containerRef={containerRef}
                 fromRef={apiGatewayRef}
                 toRef={serverRef}
                 curvature={0}
-                gradientStartColor="#8b5cf6"
-                gradientStopColor="#ec4899"
-                delay={1}
-                duration={30}
               />
               <AnimatedBeam
                 containerRef={containerRef}
                 fromRef={serverRef}
                 toRef={databaseRef}
                 curvature={20}
-                gradientStartColor="#ec4899"
-                gradientStopColor="#ef4444"
-                delay={2}
-                duration={30}
               />
               <AnimatedBeam
                 containerRef={containerRef}
                 fromRef={serverRef}
                 toRef={cacheRef}
                 curvature={0}
-                gradientStartColor="#ec4899"
-                gradientStopColor="#f59e0b"
-                delay={2.5}
-                duration={30}
               />
               <AnimatedBeam
                 containerRef={containerRef}
                 fromRef={serverRef}
                 toRef={storageRef}
                 curvature={-20}
-                gradientStartColor="#ec4899"
-                gradientStopColor="#10b981"
-                delay={3}
-                duration={10}
               />
               <AnimatedBeam
                 containerRef={containerRef}
                 fromRef={clientRef}
                 toRef={cdnRef}
                 curvature={30}
-                gradientStartColor="#3b82f6"
-                gradientStopColor="#06b6d4"
-                delay={0.5}
-                duration={40}
               />
               <AnimatedBeam
                 containerRef={containerRef}
                 fromRef={cdnRef}
                 toRef={apiGatewayRef}
                 curvature={-20}
-                gradientStartColor="#06b6d4"
-                gradientStopColor="#8b5cf6"
-                delay={1.5}
-                duration={40}
               />
             </div>
           </div>

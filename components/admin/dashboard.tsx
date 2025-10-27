@@ -482,7 +482,6 @@ export function AdminDashboard({ user }: AdminDashboardProps) {
   );
 }
 
-// Helper function to generate monthly data if not provided by API
 function generateMonthlyData(stats: Stats) {
   const months = ['Июн', 'Июл', 'Авг', 'Сен', 'Окт', 'Ноя'];
   const data = months.map((month, index) => {
@@ -497,7 +496,6 @@ function generateMonthlyData(stats: Stats) {
   return data;
 }
 
-// Helper function to generate status distribution data
 function generateStatusData(stats: Stats) {
   return [
     {
@@ -518,7 +516,6 @@ function generateStatusData(stats: Stats) {
   ];
 }
 
-// Custom label for pie chart with theme support
 function renderCustomLabel(
   { cx, cy, midAngle, innerRadius, outerRadius, percent }: any,
   isDark: boolean
@@ -548,7 +545,6 @@ function renderCustomLabel(
   );
 }
 
-// Active shape renderer for hover effect
 function renderActiveShape(props: any, isDark: boolean) {
   const {
     cx,
@@ -604,7 +600,6 @@ function renderActiveShape(props: any, isDark: boolean) {
   );
 }
 
-// Custom tooltip component
 function CustomTooltip({ active, payload, isDark }: any) {
   if (!active || !payload || !payload.length) return null;
 

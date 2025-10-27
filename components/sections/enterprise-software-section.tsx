@@ -7,6 +7,7 @@ import {
   ChartContainer,
   ChartTooltip,
 } from '@/components/ui/chart';
+import Link from 'next/link';
 
 const chartData = [
   { month: 'Янв 5', inbound: 245, outbound: 189 },
@@ -395,12 +396,12 @@ export function EnterpriseSoftwareSection() {
         <div className="mt-16 text-center"
         >
           <div className="inline-flex flex-col sm:flex-row items-center gap-4">
-            <button className="px-8 py-4 rounded-xl bg-gradient-to-r from-neutral-900 to-neutral-700 dark:from-white dark:to-neutral-200 text-white dark:text-neutral-900 font-medium hover:shadow-xl transition-shadow">
+            <Link href="/#contact" className="px-8 py-4 rounded-xl bg-gradient-to-r from-neutral-900 to-neutral-700 dark:from-white dark:to-neutral-200 text-white dark:text-neutral-900 font-medium hover:shadow-xl transition-shadow">
               <div className="flex items-center gap-2">
                 <span>Обсудить проект</span>
                 <Icon icon="lucide:arrow-right" className="h-5 w-5" />
               </div>
-            </button>
+            </Link>
             <button className="px-8 py-4 rounded-xl bg-neutral-100 dark:bg-neutral-800 text-neutral-900 dark:text-white font-medium hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-colors">
               <div className="flex items-center gap-2">
                 <Icon icon="lucide:download" className="h-5 w-5" />

@@ -17,7 +17,6 @@ export function Logo({ className = '', size = 30 }: LogoProps) {
     setMounted(true);
   }, []);
 
-  // Prevent hydration mismatch by not rendering until mounted
   if (!mounted) {
     return (
       <div

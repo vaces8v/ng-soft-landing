@@ -34,7 +34,6 @@ const AutoChat = () => {
   };
 
   useEffect(() => {
-    // Небольшая задержка для плавности
     const timer = setTimeout(() => {
       scrollToBottom();
     }, 100);
@@ -43,7 +42,6 @@ const AutoChat = () => {
 
   useEffect(() => {
     if (currentIndex >= chatScenario.length) {
-      // Перезапуск через 3 секунды после завершения
       const timeout = setTimeout(() => {
         setMessages([]);
         setCurrentIndex(0);

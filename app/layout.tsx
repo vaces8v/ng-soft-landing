@@ -3,8 +3,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import dynamic from 'next/dynamic';
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
-// Динамический импорт для уменьшения начального bundle
 const CookieConsent = dynamic(
   () => import('@/components/cookie-consent').then(mod => ({ default: mod.CookieConsent })),
   { ssr: true }
@@ -122,10 +122,7 @@ export default function RootLayout({
                 availableLanguage: ['Russian', 'English'],
               },
               sameAs: [
-                // Добавьте ссылки на социальные сети
-                // 'https://facebook.com/ngsoft',
-                // 'https://linkedin.com/company/ngsoft',
-                // 'https://twitter.com/ngsoft',
+                //  Ссылки на социальные сети
               ],
               areaServed: 'RU',
               serviceType: [
@@ -138,6 +135,7 @@ export default function RootLayout({
           }}
         />
       </head>
+      <SpeedInsights />
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >

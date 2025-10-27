@@ -7,7 +7,6 @@ import { Button } from '@/components/ui/button';
 import { Header } from '@/components/header';
 import { FloatingPaths } from '@/components/FloatingPaths';
 import { Footer } from '@/components/footer';
-// Все секции динамические для оптимизации
 
 const WebDevelopmentSection = dynamic(
   () => import('@/components/sections/web-development-section').then(mod => ({ default: mod.WebDevelopmentSection })),
@@ -102,7 +101,7 @@ export default function Home() {
 
               {/* Main Title - LCP Element */}
               <h1
-                className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold tracking-tight"
+                className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold tracking-tight"
               >
                 <span className="inline-block bg-clip-text text-transparent bg-gradient-to-b from-neutral-900 via-neutral-800 to-neutral-600 dark:from-white dark:via-neutral-200 dark:to-neutral-400">
                   Создаем будущее
