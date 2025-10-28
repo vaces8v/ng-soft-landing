@@ -202,14 +202,14 @@ export function Header() {
 
                 <NavigationMenuItem>
                   <NavigationMenuLink asChild>
-                    <a
-                      href="#contact"
+                    <Link
+                      href="/#contact"
                       className={cn(navigationMenuTriggerStyle(), 'flex items-center cursor-pointer')}
                       onClick={(e) => scrollToSection(e, '#contact')}
                     >
                       <Icon icon="lucide:mail" className="h-4 w-4 mr-2" />
                       <span className="mb-1">Контакты</span>
-                    </a>
+                    </Link>
                   </NavigationMenuLink>
                 </NavigationMenuItem>
               </NavigationMenuList>
@@ -218,7 +218,7 @@ export function Header() {
             <ThemeToggle />
 
             <Link
-              href="#contact"
+              href="/#contact"
               onClick={(e) => scrollToSection(e, '#contact')}
               className="px-5 py-2.5 rounded-lg bg-neutral-900 hover:bg-neutral-800 dark:bg-white dark:hover:bg-neutral-100 text-white dark:text-neutral-900 font-medium text-sm transition-colors shadow-sm"
             >
@@ -298,8 +298,8 @@ export function Header() {
                       <Icon icon="lucide:info" className="h-5 w-5 text-neutral-700 dark:text-neutral-300" />
                       <span className="text-sm font-medium text-neutral-900 dark:text-white">О нас</span>
                     </Link>
-                    <a
-                      href="#contact"
+                    <Link
+                      href="/#contact"
                       onClick={(e) => {
                         scrollToSection(e, '#contact');
                         setIsOpen(false);
@@ -308,11 +308,11 @@ export function Header() {
                     >
                       <Icon icon="lucide:mail" className="h-5 w-5 text-neutral-700 dark:text-neutral-300" />
                       <span className="text-sm font-medium text-neutral-900 dark:text-white">Контакты</span>
-                    </a>
+                    </Link>
                   </div>
 
                   <Link
-                    href="#contact"
+                    href="/#contact"
                     onClick={(e) => {
                       scrollToSection(e, '#contact');
                       setIsOpen(false);
