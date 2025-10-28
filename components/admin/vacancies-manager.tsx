@@ -35,7 +35,9 @@ export function VacanciesManager() {
   const [applications, setApplications] = useState<Record<string, number>>({});
   const [loading, setLoading] = useState(true);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
   const [editingVacancy, setEditingVacancy] = useState<Vacancy | null>(null);
+  const [deletingVacancyId, setDeletingVacancyId] = useState<string | null>(null);
   const [formData, setFormData] = useState({
     title: '',
     type: '',
@@ -143,20 +145,32 @@ export function VacanciesManager() {
     }
   };
 
-  const handleDelete = async (id: string) => {
-    if (!confirm('Вы уверены, что хотите удалить эту вакансию?')) return;
+  const handleDeleteClick = (id: string) => {
+    setDeletingVacancyId(id);
+    setIsDeleteDialogOpen(true);
+  };
+
+  const handleDeleteConfirm = async () => {
+    if (!deletingVacancyId) return;
 
     try {
-      const res = await fetch(`/api/vacancies/${id}`, {
+      const res = await fetch(`/api/vacancies/${deletingVacancyId}`, {
         method: 'DELETE',
       });
 
       if (res.ok) {
         await fetchVacancies();
+        setIsDeleteDialogOpen(false);
+        setDeletingVacancyId(null);
       }
     } catch (error) {
       console.error('Error deleting vacancy:', error);
     }
+  };
+
+  const handleDeleteCancel = () => {
+    setIsDeleteDialogOpen(false);
+    setDeletingVacancyId(null);
   };
 
   const addRequirement = () => {
@@ -212,7 +226,7 @@ export function VacanciesManager() {
           </p>
         </div>
         <Button onClick={handleCreate} className="w-full sm:w-auto">
-          <Icon icon="lucide:plus" className="h-4 w-4 mr-2" />
+          <Icon icon="lucide:plus" className="h-4 w-4" />
           <span className="hidden sm:inline">Создать вакансию</span>
           <span className="sm:hidden">Создать</span>
         </Button>
@@ -279,7 +293,7 @@ export function VacanciesManager() {
                     onClick={() => handleEdit(vacancy)}
                     className="flex-1 sm:flex-none"
                   >
-                    <Icon icon="lucide:edit" className="h-4 w-4 sm:mr-2" />
+                    <Icon icon="lucide:edit" className="h-4 w-4" />
                     <span className="hidden sm:inline">Редактировать</span>
                   </Button>
                   {vacancy.status === 'active' && (
@@ -289,7 +303,7 @@ export function VacanciesManager() {
                       onClick={() => handleStatusChange(vacancy.id, 'closed')}
                       className="flex-1 sm:flex-none"
                     >
-                      <Icon icon="lucide:x" className="h-4 w-4 sm:mr-2" />
+                      <Icon icon="lucide:x" className="h-4 w-4" />
                       <span className="hidden sm:inline">Закрыть</span>
                     </Button>
                   )}
@@ -300,17 +314,17 @@ export function VacanciesManager() {
                       onClick={() => handleStatusChange(vacancy.id, 'active')}
                       className="flex-1 sm:flex-none"
                     >
-                      <Icon icon="lucide:check" className="h-4 w-4 sm:mr-2" />
+                      <Icon icon="lucide:check" className="h-4 w-4" />
                       <span className="hidden sm:inline">Открыть</span>
                     </Button>
                   )}
                   <Button
                     variant="destructive"
                     size="sm"
-                    onClick={() => handleDelete(vacancy.id)}
+                    onClick={() => handleDeleteClick(vacancy.id)}
                     className="flex-1 sm:flex-none"
                   >
-                    <Icon icon="lucide:trash-2" className="h-4 w-4 sm:mr-2" />
+                    <Icon icon="lucide:trash-2" className="h-4 w-4" />
                     <span className="hidden sm:inline">Удалить</span>
                   </Button>
                   <Button
@@ -320,7 +334,7 @@ export function VacanciesManager() {
                     className="flex-1 sm:flex-none"
                   >
                     <a href={`/admin/vacancies/${vacancy.id}/applications`}>
-                      <Icon icon="lucide:file-text" className="h-4 w-4 sm:mr-2" />
+                      <Icon icon="lucide:file-text" className="h-4 w-4" />
                       <span className="hidden sm:inline">Отклики ({applications[vacancy.id] || 0})</span>
                       <span className="sm:hidden">({applications[vacancy.id] || 0})</span>
                     </a>
@@ -435,7 +449,7 @@ export function VacanciesManager() {
                   size="sm"
                   onClick={addRequirement}
                 >
-                  <Icon icon="lucide:plus" className="h-4 w-4 mr-2" />
+                  <Icon icon="lucide:plus" className="h-4 w-4" />
                   Добавить требование
                 </Button>
               </div>
@@ -447,6 +461,26 @@ export function VacanciesManager() {
             </Button>
             <Button onClick={handleSave}>
               {editingVacancy ? 'Сохранить' : 'Создать'}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      <Dialog open={isDeleteDialogOpen} onOpenChange={setIsDeleteDialogOpen}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle>Подтверждение удаления</DialogTitle>
+            <DialogDescription>
+              Вы уверены, что хотите удалить эту вакансию? Это действие нельзя отменить.
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter className="gap-2 sm:gap-0">
+            <Button variant="outline" onClick={handleDeleteCancel}>
+              Отмена
+            </Button>
+            <Button variant="destructive" onClick={handleDeleteConfirm}>
+              <Icon icon="lucide:trash-2" className="h-4 w-4 mr-2" />
+              Удалить
             </Button>
           </DialogFooter>
         </DialogContent>

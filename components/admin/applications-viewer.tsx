@@ -5,7 +5,8 @@ import { Icon } from '@iconify/react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import type { Application, Vacancy } from '@/lib/vacancies-store';
 
 interface ApplicationsViewerProps {
@@ -17,6 +18,8 @@ export function ApplicationsViewer({ vacancyId }: ApplicationsViewerProps) {
   const [applications, setApplications] = useState<Application[]>([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState<'all' | 'new' | 'reviewed' | 'accepted' | 'rejected'>('all');
+  const [isRejectDialogOpen, setIsRejectDialogOpen] = useState(false);
+  const [rejectingApplicationId, setRejectingApplicationId] = useState<string | null>(null);
 
   useEffect(() => {
     fetchData();
@@ -42,6 +45,13 @@ export function ApplicationsViewer({ vacancyId }: ApplicationsViewerProps) {
   };
 
   const handleStatusChange = async (applicationId: string, status: Application['status']) => {
+    // Если статус "rejected", показываем диалог подтверждения
+    if (status === 'rejected') {
+      setRejectingApplicationId(applicationId);
+      setIsRejectDialogOpen(true);
+      return;
+    }
+
     try {
       const res = await fetch(`/api/job-applications/${applicationId}`, {
         method: 'PATCH',
@@ -55,6 +65,31 @@ export function ApplicationsViewer({ vacancyId }: ApplicationsViewerProps) {
     } catch (error) {
       console.error('Error updating status:', error);
     }
+  };
+
+  const handleRejectConfirm = async () => {
+    if (!rejectingApplicationId) return;
+
+    try {
+      const res = await fetch(`/api/job-applications/${rejectingApplicationId}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ status: 'rejected' }),
+      });
+
+      if (res.ok) {
+        await fetchData();
+        setIsRejectDialogOpen(false);
+        setRejectingApplicationId(null);
+      }
+    } catch (error) {
+      console.error('Error updating status:', error);
+    }
+  };
+
+  const handleRejectCancel = () => {
+    setIsRejectDialogOpen(false);
+    setRejectingApplicationId(null);
   };
 
   const getStatusBadge = (status: string) => {
@@ -106,7 +141,7 @@ export function ApplicationsViewer({ vacancyId }: ApplicationsViewerProps) {
       <div className="mb-6 md:mb-8">
         <Button variant="ghost" asChild className="mb-4">
           <a href="/admin/vacancies">
-            <Icon icon="lucide:arrow-left" className="h-4 w-4 mr-2" />
+            <Icon icon="lucide:arrow-left" className="h-4 w-4" />
             <span className="hidden sm:inline">Назад к вакансиям</span>
             <span className="sm:hidden">Назад</span>
           </a>
@@ -175,7 +210,7 @@ export function ApplicationsViewer({ vacancyId }: ApplicationsViewerProps) {
                   <div className="mb-4">
                     <Button variant="outline" size="sm" asChild>
                       <a href={application.resume} target="_blank" rel="noopener noreferrer">
-                        <Icon icon="lucide:file-text" className="h-4 w-4 mr-2" />
+                        <Icon icon="lucide:file-text" className="h-4 w-4" />
                         Скачать резюме
                       </a>
                     </Button>
@@ -218,6 +253,26 @@ export function ApplicationsViewer({ vacancyId }: ApplicationsViewerProps) {
           ))
         )}
       </div>
+
+      <Dialog open={isRejectDialogOpen} onOpenChange={setIsRejectDialogOpen}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle>Подтверждение отклонения</DialogTitle>
+            <DialogDescription>
+              Вы уверены, что хотите отклонить эту заявку? Кандидат будет уведомлен об отклонении.
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter className="gap-2 sm:gap-0">
+            <Button variant="outline" onClick={handleRejectCancel}>
+              Отмена
+            </Button>
+            <Button variant="destructive" onClick={handleRejectConfirm}>
+              <Icon icon="lucide:x" className="h-4 w-4 mr-2" />
+              Отклонить
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
