@@ -3,6 +3,8 @@ import Link from 'next/link';
 import { Header } from '@/components/header';
 import { Footer } from '@/components/footer';
 
+export const dynamic = 'force-static';
+
 const cookieTypes = [
   {
     name: 'Необходимые cookie',
@@ -66,7 +68,6 @@ export default function CookiesPage() {
               {/* Badge */}
               <div className="inline-block">
                 <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-neutral-100 to-neutral-200 dark:from-neutral-800 dark:to-neutral-900 border border-neutral-300 dark:border-neutral-700">
-                  <Icon icon="lucide:cookie" className="h-4 w-4" />
                   <span className="text-sm font-medium">Юридическая информация</span>
                 </div>
               </div>
@@ -104,15 +105,10 @@ export default function CookiesPage() {
 
                   {/* What are cookies */}
                   <div className="mb-10">
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-neutral-100 to-neutral-200 dark:from-neutral-800 dark:to-neutral-900 flex items-center justify-center flex-shrink-0">
-                        <Icon icon="lucide:info" className="h-5 w-5" />
-                      </div>
-                      <h2 className="text-2xl font-bold text-neutral-900 dark:text-white">
-                        Что такое cookie?
-                      </h2>
-                    </div>
-                    <div className="space-y-4 ml-13 text-neutral-600 dark:text-neutral-400">
+                    <h2 className="text-2xl font-bold text-neutral-900 dark:text-white mb-4">
+                      Что такое cookie?
+                    </h2>
+                    <div className="space-y-4 text-neutral-600 dark:text-neutral-400">
                       <p>
                         Cookie (куки) — это небольшие текстовые файлы, которые размещаются на вашем 
                         устройстве (компьютере, планшете или телефоне) при посещении веб-сайта. 
@@ -133,10 +129,7 @@ export default function CookiesPage() {
                           key={index}
                           className="rounded-2xl bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 p-6"
                         >
-                          <div className="flex items-start gap-4">
-                            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-neutral-100 to-neutral-200 dark:from-neutral-800 dark:to-neutral-900 flex items-center justify-center flex-shrink-0">
-                              <Icon icon={type.icon} className="h-6 w-6" />
-                            </div>
+                          <div>
                             <div className="flex-1">
                               <div className="flex items-center gap-3 mb-2">
                                 <h3 className="text-lg font-semibold text-neutral-900 dark:text-white">
@@ -155,11 +148,10 @@ export default function CookiesPage() {
                                 <p className="text-xs font-medium text-neutral-700 dark:text-neutral-300 mb-2">
                                   Примеры:
                                 </p>
-                                <ul className="space-y-1">
+                                <ul className="space-y-1 ml-4 list-disc">
                                   {type.examples.map((example, idx) => (
-                                    <li key={idx} className="flex items-start gap-2 text-xs text-neutral-600 dark:text-neutral-400">
-                                      <Icon icon="lucide:check" className="h-3.5 w-3.5 mt-0.5 flex-shrink-0" />
-                                      <span>{example}</span>
+                                    <li key={idx} className="text-xs text-neutral-600 dark:text-neutral-400">
+                                      {example}
                                     </li>
                                   ))}
                                 </ul>
@@ -173,15 +165,10 @@ export default function CookiesPage() {
 
                   {/* How we use cookies */}
                   <div className="mb-10">
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-neutral-100 to-neutral-200 dark:from-neutral-800 dark:to-neutral-900 flex items-center justify-center flex-shrink-0">
-                        <Icon icon="lucide:target" className="h-5 w-5" />
-                      </div>
-                      <h2 className="text-2xl font-bold text-neutral-900 dark:text-white">
-                        Как мы используем cookie
-                      </h2>
-                    </div>
-                    <div className="space-y-4 ml-13 text-neutral-600 dark:text-neutral-400">
+                    <h2 className="text-2xl font-bold text-neutral-900 dark:text-white mb-4">
+                      Как мы используем cookie
+                    </h2>
+                    <div className="space-y-4 text-neutral-600 dark:text-neutral-400">
                       <p>Мы используем cookie для следующих целей:</p>
                       <ul className="space-y-2 ml-6 list-disc">
                         <li><strong>Функционирование сайта:</strong> обеспечение основных функций, таких как навигация и доступ к защищенным областям</li>
@@ -194,15 +181,10 @@ export default function CookiesPage() {
 
                   {/* Third party cookies */}
                   <div className="mb-10">
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-neutral-100 to-neutral-200 dark:from-neutral-800 dark:to-neutral-900 flex items-center justify-center flex-shrink-0">
-                        <Icon icon="lucide:globe" className="h-5 w-5" />
-                      </div>
-                      <h2 className="text-2xl font-bold text-neutral-900 dark:text-white">
-                        Cookie третьих сторон
-                      </h2>
-                    </div>
-                    <div className="space-y-4 ml-13 text-neutral-600 dark:text-neutral-400">
+                    <h2 className="text-2xl font-bold text-neutral-900 dark:text-white mb-4">
+                      Cookie третьих сторон
+                    </h2>
+                    <div className="space-y-4 text-neutral-600 dark:text-neutral-400">
                       <p>
                         Некоторые cookie на нашем сайте размещаются третьими сторонами. 
                         Мы используем следующие сторонние сервисы:
@@ -216,15 +198,10 @@ export default function CookiesPage() {
 
                   {/* Managing cookies */}
                   <div className="mb-10">
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-neutral-100 to-neutral-200 dark:from-neutral-800 dark:to-neutral-900 flex items-center justify-center flex-shrink-0">
-                        <Icon icon="lucide:settings" className="h-5 w-5" />
-                      </div>
-                      <h2 className="text-2xl font-bold text-neutral-900 dark:text-white">
-                        Управление cookie
-                      </h2>
-                    </div>
-                    <div className="space-y-4 ml-13 text-neutral-600 dark:text-neutral-400">
+                    <h2 className="text-2xl font-bold text-neutral-900 dark:text-white mb-4">
+                      Управление cookie
+                    </h2>
+                    <div className="space-y-4 text-neutral-600 dark:text-neutral-400">
                       <p>
                         Вы можете управлять cookie через настройки вашего браузера. 
                         Большинство браузеров позволяют:
@@ -244,15 +221,10 @@ export default function CookiesPage() {
 
                   {/* Browser instructions */}
                   <div className="mb-10">
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-neutral-100 to-neutral-200 dark:from-neutral-800 dark:to-neutral-900 flex items-center justify-center flex-shrink-0">
-                        <Icon icon="lucide:monitor" className="h-5 w-5" />
-                      </div>
-                      <h2 className="text-2xl font-bold text-neutral-900 dark:text-white">
-                        Инструкции для популярных браузеров
-                      </h2>
-                    </div>
-                    <div className="space-y-3 ml-13 text-neutral-600 dark:text-neutral-400">
+                    <h2 className="text-2xl font-bold text-neutral-900 dark:text-white mb-4">
+                      Инструкции для популярных браузеров
+                    </h2>
+                    <div className="space-y-3 text-neutral-600 dark:text-neutral-400">
                       <ul className="space-y-2 ml-6 list-disc">
                         <li><strong>Google Chrome:</strong> Настройки → Конфиденциальность и безопасность → Cookie и другие данные сайтов</li>
                         <li><strong>Mozilla Firefox:</strong> Настройки → Приватность и защита → Cookie и данные сайтов</li>
@@ -264,14 +236,11 @@ export default function CookiesPage() {
 
                   {/* Contact Section */}
                   <div className="mt-12 pt-8 border-t border-neutral-200 dark:border-neutral-800">
-                    <div className="flex items-start gap-3 mb-4">
-                      <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-neutral-100 to-neutral-200 dark:from-neutral-800 dark:to-neutral-900 flex items-center justify-center flex-shrink-0">
-                        <Icon icon="lucide:mail" className="h-5 w-5" />
-                      </div>
+                    <div>
+                      <h2 className="text-2xl font-bold text-neutral-900 dark:text-white mb-2">
+                        Вопросы о cookie
+                      </h2>
                       <div>
-                        <h2 className="text-2xl font-bold text-neutral-900 dark:text-white mb-2">
-                          Вопросы о cookie
-                        </h2>
                         <p className="text-neutral-600 dark:text-neutral-400">
                           Если у вас есть вопросы о нашем использовании cookie, свяжитесь с нами:{' '}
                           <a href="mailto:privacy@ng-soft.ru" className="text-neutral-900 dark:text-white underline hover:no-underline">

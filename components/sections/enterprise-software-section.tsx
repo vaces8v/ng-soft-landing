@@ -402,12 +402,6 @@ export function EnterpriseSoftwareSection() {
                 <Icon icon="lucide:arrow-right" className="h-5 w-5" />
               </div>
             </Link>
-            <button className="px-8 py-4 rounded-xl bg-neutral-100 dark:bg-neutral-800 text-neutral-900 dark:text-white font-medium hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-colors">
-              <div className="flex items-center gap-2">
-                <Icon icon="lucide:download" className="h-5 w-5" />
-                <span>Все услуги</span>
-              </div>
-            </button>
           </div>
         </div>
       </div>

@@ -40,7 +40,7 @@ export default function NotFound() {
               variant="outline"
               className="h-11 rounded-2xl border-neutral-300 text-neutral-700 hover:bg-neutral-100 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-800"
             >
-              <Link href="#contact">Связаться</Link>
+              <Link href="/#contact">Связаться</Link>
             </Button>
           </div>
 

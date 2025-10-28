@@ -143,7 +143,7 @@ export function Header() {
                       {services.map((service) => (
                         <li key={service.title}>
                           <NavigationMenuLink asChild>
-                            <a
+                            <Link
                               href={service.href}
                               onClick={(e) => scrollToSection(e, service.href)}
                               className={cn(
@@ -168,7 +168,7 @@ export function Header() {
                                   </p>
                                 </div>
                               </div>
-                            </a>
+                            </Link>
                           </NavigationMenuLink>
                         </li>
                       ))}

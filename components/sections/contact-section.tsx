@@ -178,9 +178,9 @@ export function ContactSection() {
               </p>
               <div className="flex gap-3">
                 {[
-                  { icon: 'simple-icons:telegram', link: '#', name: 'Telegram' },
-                  { icon: 'simple-icons:whatsapp', link: '#', name: 'WhatsApp' },
-                  { icon: 'simple-icons:github', link: '#', name: 'GitHub' },
+                  { icon: 'simple-icons:telegram', link: 'https://t.me/NGSOFT_bot', name: 'Telegram' },
+                  { icon: 'simple-icons:whatsapp', link: 'https://wa.me/79256822620', name: 'WhatsApp' },
+                  { icon: 'simple-icons:vk', link: 'https://vk.com/ng_soft', name: 'VK' },
                 ].map((social, index) => (
                   <a
                     key={index}

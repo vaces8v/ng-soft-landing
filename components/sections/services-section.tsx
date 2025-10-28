@@ -300,7 +300,7 @@ export function ServicesSection() {
   ));
 
   return (
-    <section id="services" className="relative py-20 bg-gradient-to-b from-neutral-50 via-white to-neutral-50 dark:from-neutral-950 dark:via-neutral-900 dark:to-neutral-950">
+    <section id="services" className="relative pb-20 bg-gradient-to-b from-neutral-50 via-white to-neutral-50 dark:from-neutral-950 dark:via-neutral-900 dark:to-neutral-950">
       <div className="mx-auto">
         <Carousel items={cards} />
       </div>

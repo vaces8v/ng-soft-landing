@@ -3,6 +3,8 @@ import Link from 'next/link';
 import { Header } from '@/components/header';
 import { Footer } from '@/components/footer';
 
+export const dynamic = 'force-static';
+
 export default function PrivacyPage() {
   return (
     <>
@@ -19,7 +21,6 @@ export default function PrivacyPage() {
               {/* Badge */}
               <div className="inline-block">
                 <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-neutral-100 to-neutral-200 dark:from-neutral-800 dark:to-neutral-900 border border-neutral-300 dark:border-neutral-700">
-                  <Icon icon="lucide:shield-check" className="h-4 w-4" />
                   <span className="text-sm font-medium">Юридическая информация</span>
                 </div>
               </div>
@@ -57,15 +58,10 @@ export default function PrivacyPage() {
 
                   {/* Section 1 */}
                   <div className="mb-10">
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-neutral-100 to-neutral-200 dark:from-neutral-800 dark:to-neutral-900 flex items-center justify-center flex-shrink-0">
-                        <Icon icon="lucide:file-text" className="h-5 w-5" />
-                      </div>
-                      <h2 className="text-2xl font-bold text-neutral-900 dark:text-white">
-                        1. Какую информацию мы собираем
-                      </h2>
-                    </div>
-                    <div className="space-y-4 ml-13 text-neutral-600 dark:text-neutral-400">
+                    <h2 className="text-2xl font-bold text-neutral-900 dark:text-white mb-4">
+                      1. Какую информацию мы собираем
+                    </h2>
+                    <div className="space-y-4 text-neutral-600 dark:text-neutral-400">
                       <p>Мы можем собирать следующие виды информации:</p>
                       <ul className="space-y-2 ml-6 list-disc">
                         <li><strong>Личная информация:</strong> имя, адрес электронной почты, номер телефона, должность</li>
@@ -78,15 +74,10 @@ export default function PrivacyPage() {
 
                   {/* Section 2 */}
                   <div className="mb-10">
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-neutral-100 to-neutral-200 dark:from-neutral-800 dark:to-neutral-900 flex items-center justify-center flex-shrink-0">
-                        <Icon icon="lucide:eye" className="h-5 w-5" />
-                      </div>
-                      <h2 className="text-2xl font-bold text-neutral-900 dark:text-white">
-                        2. Как мы используем вашу информацию
-                      </h2>
-                    </div>
-                    <div className="space-y-4 ml-13 text-neutral-600 dark:text-neutral-400">
+                    <h2 className="text-2xl font-bold text-neutral-900 dark:text-white mb-4">
+                      2. Как мы используем вашу информацию
+                    </h2>
+                    <div className="space-y-4 text-neutral-600 dark:text-neutral-400">
                       <p>Мы используем собранную информацию для:</p>
                       <ul className="space-y-2 ml-6 list-disc">
                         <li>Предоставления и улучшения наших услуг</li>
@@ -100,15 +91,10 @@ export default function PrivacyPage() {
 
                   {/* Section 3 */}
                   <div className="mb-10">
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-neutral-100 to-neutral-200 dark:from-neutral-800 dark:to-neutral-900 flex items-center justify-center flex-shrink-0">
-                        <Icon icon="lucide:shield" className="h-5 w-5" />
-                      </div>
-                      <h2 className="text-2xl font-bold text-neutral-900 dark:text-white">
-                        3. Защита данных
-                      </h2>
-                    </div>
-                    <div className="space-y-4 ml-13 text-neutral-600 dark:text-neutral-400">
+                    <h2 className="text-2xl font-bold text-neutral-900 dark:text-white mb-4">
+                      3. Защита данных
+                    </h2>
+                    <div className="space-y-4 text-neutral-600 dark:text-neutral-400">
                       <p>
                         Мы применяем современные технические и организационные меры для защиты 
                         ваших персональных данных от несанкционированного доступа, изменения, 
@@ -125,15 +111,10 @@ export default function PrivacyPage() {
 
                   {/* Section 4 */}
                   <div className="mb-10">
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-neutral-100 to-neutral-200 dark:from-neutral-800 dark:to-neutral-900 flex items-center justify-center flex-shrink-0">
-                        <Icon icon="lucide:share-2" className="h-5 w-5" />
-                      </div>
-                      <h2 className="text-2xl font-bold text-neutral-900 dark:text-white">
-                        4. Передача данных третьим лицам
-                      </h2>
-                    </div>
-                    <div className="space-y-4 ml-13 text-neutral-600 dark:text-neutral-400">
+                    <h2 className="text-2xl font-bold text-neutral-900 dark:text-white mb-4">
+                      4. Передача данных третьим лицам
+                    </h2>
+                    <div className="space-y-4 text-neutral-600 dark:text-neutral-400">
                       <p>
                         Мы не продаем и не передаем ваши персональные данные третьим лицам, 
                         за исключением случаев:
@@ -148,15 +129,10 @@ export default function PrivacyPage() {
 
                   {/* Section 5 */}
                   <div className="mb-10">
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-neutral-100 to-neutral-200 dark:from-neutral-800 dark:to-neutral-900 flex items-center justify-center flex-shrink-0">
-                        <Icon icon="lucide:user-check" className="h-5 w-5" />
-                      </div>
-                      <h2 className="text-2xl font-bold text-neutral-900 dark:text-white">
-                        5. Ваши права
-                      </h2>
-                    </div>
-                    <div className="space-y-4 ml-13 text-neutral-600 dark:text-neutral-400">
+                    <h2 className="text-2xl font-bold text-neutral-900 dark:text-white mb-4">
+                      5. Ваши права
+                    </h2>
+                    <div className="space-y-4 text-neutral-600 dark:text-neutral-400">
                       <p>Вы имеете право:</p>
                       <ul className="space-y-2 ml-6 list-disc">
                         <li>Получить доступ к своим персональным данным</li>
@@ -170,15 +146,10 @@ export default function PrivacyPage() {
 
                   {/* Section 6 */}
                   <div className="mb-10">
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-neutral-100 to-neutral-200 dark:from-neutral-800 dark:to-neutral-900 flex items-center justify-center flex-shrink-0">
-                        <Icon icon="lucide:cookie" className="h-5 w-5" />
-                      </div>
-                      <h2 className="text-2xl font-bold text-neutral-900 dark:text-white">
-                        6. Файлы cookie
-                      </h2>
-                    </div>
-                    <div className="space-y-4 ml-13 text-neutral-600 dark:text-neutral-400">
+                    <h2 className="text-2xl font-bold text-neutral-900 dark:text-white mb-4">
+                      6. Файлы cookie
+                    </h2>
+                    <div className="space-y-4 text-neutral-600 dark:text-neutral-400">
                       <p>
                         Наш сайт использует файлы cookie для улучшения пользовательского опыта. 
                         Подробнее о типах используемых cookie и способах управления ими читайте в нашей{' '}
@@ -191,14 +162,11 @@ export default function PrivacyPage() {
 
                   {/* Contact Section */}
                   <div className="mt-12 pt-8 border-t border-neutral-200 dark:border-neutral-800">
-                    <div className="flex items-start gap-3 mb-4">
-                      <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-neutral-100 to-neutral-200 dark:from-neutral-800 dark:to-neutral-900 flex items-center justify-center flex-shrink-0">
-                        <Icon icon="lucide:mail" className="h-5 w-5" />
-                      </div>
+                    <div>
+                      <h2 className="text-2xl font-bold text-neutral-900 dark:text-white mb-2">
+                        Контактная информация
+                      </h2>
                       <div>
-                        <h2 className="text-2xl font-bold text-neutral-900 dark:text-white mb-2">
-                          Контактная информация
-                        </h2>
                         <p className="text-neutral-600 dark:text-neutral-400">
                           По вопросам, связанным с обработкой персональных данных, обращайтесь:{' '}
                           <a href="mailto:privacy@ng-soft.ru" className="text-neutral-900 dark:text-white underline hover:no-underline">

@@ -3,6 +3,8 @@ import Link from 'next/link';
 import { Header } from '@/components/header';
 import { Footer } from '@/components/footer';
 
+export const dynamic = 'force-static';
+
 export default function TermsPage() {
   return (
     <>
@@ -19,7 +21,6 @@ export default function TermsPage() {
               {/* Badge */}
               <div className="inline-block">
                 <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-neutral-100 to-neutral-200 dark:from-neutral-800 dark:to-neutral-900 border border-neutral-300 dark:border-neutral-700">
-                  <Icon icon="lucide:file-text" className="h-4 w-4" />
                   <span className="text-sm font-medium">Юридическая информация</span>
                 </div>
               </div>
@@ -57,15 +58,10 @@ export default function TermsPage() {
 
                   {/* Section 1 */}
                   <div className="mb-10">
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-neutral-100 to-neutral-200 dark:from-neutral-800 dark:to-neutral-900 flex items-center justify-center flex-shrink-0">
-                        <Icon icon="lucide:scale" className="h-5 w-5" />
-                      </div>
-                      <h2 className="text-2xl font-bold text-neutral-900 dark:text-white">
-                        1. Принятие условий
-                      </h2>
-                    </div>
-                    <div className="space-y-4 ml-13 text-neutral-600 dark:text-neutral-400">
+                    <h2 className="text-2xl font-bold text-neutral-900 dark:text-white mb-4">
+                      1. Принятие условий
+                    </h2>
+                    <div className="space-y-4 text-neutral-600 dark:text-neutral-400">
                       <p>
                         Получая доступ к нашему веб-сайту или используя наши услуги, вы подтверждаете, 
                         что прочитали, поняли и согласны соблюдать настоящие Условия использования. 
@@ -76,15 +72,10 @@ export default function TermsPage() {
 
                   {/* Section 2 */}
                   <div className="mb-10">
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-neutral-100 to-neutral-200 dark:from-neutral-800 dark:to-neutral-900 flex items-center justify-center flex-shrink-0">
-                        <Icon icon="lucide:briefcase" className="h-5 w-5" />
-                      </div>
-                      <h2 className="text-2xl font-bold text-neutral-900 dark:text-white">
-                        2. Услуги
-                      </h2>
-                    </div>
-                    <div className="space-y-4 ml-13 text-neutral-600 dark:text-neutral-400">
+                    <h2 className="text-2xl font-bold text-neutral-900 dark:text-white mb-4">
+                      2. Услуги
+                    </h2>
+                    <div className="space-y-4 text-neutral-600 dark:text-neutral-400">
                       <p>NG-Soft предоставляет следующие услуги:</p>
                       <ul className="space-y-2 ml-6 list-disc">
                         <li>Разработка веб-приложений и сайтов</li>
@@ -102,15 +93,10 @@ export default function TermsPage() {
 
                   {/* Section 3 */}
                   <div className="mb-10">
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-neutral-100 to-neutral-200 dark:from-neutral-800 dark:to-neutral-900 flex items-center justify-center flex-shrink-0">
-                        <Icon icon="lucide:copyright" className="h-5 w-5" />
-                      </div>
-                      <h2 className="text-2xl font-bold text-neutral-900 dark:text-white">
-                        3. Интеллектуальная собственность
-                      </h2>
-                    </div>
-                    <div className="space-y-4 ml-13 text-neutral-600 dark:text-neutral-400">
+                    <h2 className="text-2xl font-bold text-neutral-900 dark:text-white mb-4">
+                      3. Интеллектуальная собственность
+                    </h2>
+                    <div className="space-y-4 text-neutral-600 dark:text-neutral-400">
                       <p>
                         Все материалы на нашем веб-сайте, включая, но не ограничиваясь, текст, 
                         графику, логотипы, изображения и программное обеспечение, являются 
@@ -125,15 +111,10 @@ export default function TermsPage() {
 
                   {/* Section 4 */}
                   <div className="mb-10">
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-neutral-100 to-neutral-200 dark:from-neutral-800 dark:to-neutral-900 flex items-center justify-center flex-shrink-0">
-                        <Icon icon="lucide:user-x" className="h-5 w-5" />
-                      </div>
-                      <h2 className="text-2xl font-bold text-neutral-900 dark:text-white">
-                        4. Ограничения использования
-                      </h2>
-                    </div>
-                    <div className="space-y-4 ml-13 text-neutral-600 dark:text-neutral-400">
+                    <h2 className="text-2xl font-bold text-neutral-900 dark:text-white mb-4">
+                      4. Ограничения использования
+                    </h2>
+                    <div className="space-y-4 text-neutral-600 dark:text-neutral-400">
                       <p>При использовании наших услуг запрещается:</p>
                       <ul className="space-y-2 ml-6 list-disc">
                         <li>Нарушать применимые законы и нормативные акты</li>
@@ -147,15 +128,10 @@ export default function TermsPage() {
 
                   {/* Section 5 */}
                   <div className="mb-10">
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-neutral-100 to-neutral-200 dark:from-neutral-800 dark:to-neutral-900 flex items-center justify-center flex-shrink-0">
-                        <Icon icon="lucide:shield-alert" className="h-5 w-5" />
-                      </div>
-                      <h2 className="text-2xl font-bold text-neutral-900 dark:text-white">
-                        5. Отказ от гарантий
-                      </h2>
-                    </div>
-                    <div className="space-y-4 ml-13 text-neutral-600 dark:text-neutral-400">
+                    <h2 className="text-2xl font-bold text-neutral-900 dark:text-white mb-4">
+                      5. Отказ от гарантий
+                    </h2>
+                    <div className="space-y-4 text-neutral-600 dark:text-neutral-400">
                       <p>
                         Наш веб-сайт и услуги предоставляются "как есть" без каких-либо гарантий, 
                         явных или подразумеваемых. Мы не гарантируем, что:
@@ -170,15 +146,10 @@ export default function TermsPage() {
 
                   {/* Section 6 */}
                   <div className="mb-10">
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-neutral-100 to-neutral-200 dark:from-neutral-800 dark:to-neutral-900 flex items-center justify-center flex-shrink-0">
-                        <Icon icon="lucide:alert-circle" className="h-5 w-5" />
-                      </div>
-                      <h2 className="text-2xl font-bold text-neutral-900 dark:text-white">
-                        6. Ограничение ответственности
-                      </h2>
-                    </div>
-                    <div className="space-y-4 ml-13 text-neutral-600 dark:text-neutral-400">
+                    <h2 className="text-2xl font-bold text-neutral-900 dark:text-white mb-4">
+                      6. Ограничение ответственности
+                    </h2>
+                    <div className="space-y-4 text-neutral-600 dark:text-neutral-400">
                       <p>
                         NG-Soft не несет ответственности за любые прямые, косвенные, случайные 
                         или последующие убытки, возникшие в результате:
@@ -193,15 +164,10 @@ export default function TermsPage() {
 
                   {/* Section 7 */}
                   <div className="mb-10">
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-neutral-100 to-neutral-200 dark:from-neutral-800 dark:to-neutral-900 flex items-center justify-center flex-shrink-0">
-                        <Icon icon="lucide:refresh-cw" className="h-5 w-5" />
-                      </div>
-                      <h2 className="text-2xl font-bold text-neutral-900 dark:text-white">
-                        7. Изменения условий
-                      </h2>
-                    </div>
-                    <div className="space-y-4 ml-13 text-neutral-600 dark:text-neutral-400">
+                    <h2 className="text-2xl font-bold text-neutral-900 dark:text-white mb-4">
+                      7. Изменения условий
+                    </h2>
+                    <div className="space-y-4 text-neutral-600 dark:text-neutral-400">
                       <p>
                         Мы оставляем за собой право изменять настоящие Условия в любое время. 
                         Изменения вступают в силу с момента публикации на сайте. Продолжая использовать 
@@ -212,15 +178,10 @@ export default function TermsPage() {
 
                   {/* Section 8 */}
                   <div className="mb-10">
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-neutral-100 to-neutral-200 dark:from-neutral-800 dark:to-neutral-900 flex items-center justify-center flex-shrink-0">
-                        <Icon icon="lucide:map-pin" className="h-5 w-5" />
-                      </div>
-                      <h2 className="text-2xl font-bold text-neutral-900 dark:text-white">
-                        8. Применимое право
-                      </h2>
-                    </div>
-                    <div className="space-y-4 ml-13 text-neutral-600 dark:text-neutral-400">
+                    <h2 className="text-2xl font-bold text-neutral-900 dark:text-white mb-4">
+                      8. Применимое право
+                    </h2>
+                    <div className="space-y-4 text-neutral-600 dark:text-neutral-400">
                       <p>
                         Настоящие Условия регулируются и толкуются в соответствии с законодательством 
                         Российской Федерации. Все споры подлежат разрешению в судах по месту 
@@ -231,14 +192,11 @@ export default function TermsPage() {
 
                   {/* Contact Section */}
                   <div className="mt-12 pt-8 border-t border-neutral-200 dark:border-neutral-800">
-                    <div className="flex items-start gap-3 mb-4">
-                      <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-neutral-100 to-neutral-200 dark:from-neutral-800 dark:to-neutral-900 flex items-center justify-center flex-shrink-0">
-                        <Icon icon="lucide:mail" className="h-5 w-5" />
-                      </div>
+                    <div>
+                      <h2 className="text-2xl font-bold text-neutral-900 dark:text-white mb-2">
+                        Контактная информация
+                      </h2>
                       <div>
-                        <h2 className="text-2xl font-bold text-neutral-900 dark:text-white mb-2">
-                          Контактная информация
-                        </h2>
                         <p className="text-neutral-600 dark:text-neutral-400">
                           По вопросам, связанным с Условиями использования, обращайтесь:{' '}
                           <a href="mailto:legal@ng-soft.ru" className="text-neutral-900 dark:text-white underline hover:no-underline">

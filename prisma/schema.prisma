@@ -32,3 +32,40 @@ model Application {
   @@index([status])
   @@index([createdAt])
 }
+
+model Vacancy {
+  id               String            @id @default(cuid())
+  title            String
+  type             String
+  location         String
+  icon             String            @default("lucide:briefcase")
+  description      String            @db.Text
+  requirements     String[]
+  status           String            @default("active") // active, closed
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
+  jobApplications  JobApplication[]
+
+  @@index([status])
+  @@index([createdAt])
+  @@map("vacancies")
+}
+
+model JobApplication {
+  id           String   @id @default(cuid())
+  vacancyId    String
+  vacancy      Vacancy  @relation(fields: [vacancyId], references: [id], onDelete: Cascade)
+  name         String
+  email        String
+  phone        String
+  resume       String?
+  coverLetter  String   @db.Text
+  status       String   @default("new") // new, reviewed, rejected, accepted
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@index([vacancyId])
+  @@index([status])
+  @@index([createdAt])
+  @@map("job_applications")
+}

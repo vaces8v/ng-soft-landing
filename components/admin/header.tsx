@@ -24,6 +24,11 @@ export function AdminHeader({ user }: AdminHeaderProps) {
       icon: 'lucide:layout-dashboard',
     },
     {
+      href: '/admin/vacancies',
+      label: 'Вакансии',
+      icon: 'lucide:briefcase',
+    },
+    {
       href: '/admin/applications',
       label: 'Заявки',
       icon: 'lucide:inbox',

@@ -8,6 +8,9 @@ import { Header } from '@/components/header';
 import { FloatingPaths } from '@/components/FloatingPaths';
 import { Footer } from '@/components/footer';
 
+export const dynamicParams = false;
+export const revalidate = false;
+
 const WebDevelopmentSection = dynamic(
   () => import('@/components/sections/web-development-section').then(mod => ({ default: mod.WebDevelopmentSection })),
   { loading: () => <SectionLoader /> }

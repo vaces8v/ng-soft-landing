@@ -1,4 +1,3 @@
-import { Icon } from '@iconify/react';
 import Link from 'next/link';
 import { Metadata } from 'next';
 import { Button } from '@/components/ui/button';
@@ -8,6 +7,8 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/
 import { Header } from '@/components/header';
 import { Footer } from '@/components/footer';
 import { FAQStructuredData, BreadcrumbStructuredData } from '@/components/seo/structured-data';
+
+export const dynamic = 'force-static';
 
 export const metadata: Metadata = {
   title: 'Часто задаваемые вопросы',
@@ -114,7 +115,6 @@ export default function FAQPage() {
             <div className="max-w-4xl mx-auto text-center space-y-6">
               {/* Badge */}
               <Badge variant="outline" className="px-4 py-2 bg-gradient-to-r from-neutral-100 to-neutral-200 dark:from-neutral-800 dark:to-neutral-900 border-neutral-300 dark:border-neutral-700">
-                <Icon icon="lucide:message-circle-question" className="h-4 w-4 mr-2" />
                 FAQ
               </Badge>
 
@@ -143,12 +143,7 @@ export default function FAQPage() {
               {faqs.map((category, catIndex) => (
                 <Card key={catIndex} className="border-neutral-200 dark:border-neutral-800">
                   <CardHeader>
-                    <div className="flex items-center gap-3">
-                      <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-neutral-100 to-neutral-200 dark:from-neutral-800 dark:to-neutral-900 flex items-center justify-center">
-                        <Icon icon={category.icon} className="h-6 w-6" />
-                      </div>
-                      <CardTitle className="text-2xl">{category.category}</CardTitle>
-                    </div>
+                    <CardTitle className="text-2xl">{category.category}</CardTitle>
                   </CardHeader>
                   <CardContent>
                     <Accordion type="single" collapsible className="w-full">
@@ -175,8 +170,6 @@ export default function FAQPage() {
           <div className="container mx-auto px-4 md:px-6">
             <Card className="max-w-4xl mx-auto text-center border-neutral-200 dark:border-neutral-700">
               <CardContent className="p-12 md:p-16">
-                <Icon icon="lucide:mail" className="h-12 w-12 mx-auto mb-6 text-neutral-700 dark:text-neutral-300" />
-                
                 <CardTitle className="text-3xl md:text-4xl mb-4">
                   <span className="bg-clip-text text-transparent bg-gradient-to-b from-neutral-900 via-neutral-800 to-neutral-600 dark:from-white dark:via-neutral-200 dark:to-neutral-400">
                     Не нашли ответ?
@@ -195,7 +188,6 @@ export default function FAQPage() {
                   >
                     <Link href="#contact">
                       Связаться с нами
-                      <Icon icon="lucide:arrow-right" className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
                     </Link>
                   </Button>
 
@@ -204,8 +196,8 @@ export default function FAQPage() {
                     size="lg"
                     variant="outline"
                   >
-                    <Link href="/portfolio">
-                      Посмотреть портфолио
+                    <Link href="/projects">
+                      Посмотреть проекты
                     </Link>
                   </Button>
                 </div>

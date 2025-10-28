@@ -220,8 +220,8 @@ export default function AboutPage() {
                   variant="outline"
                   className="border-neutral-300 dark:border-neutral-700 hover:bg-neutral-100 dark:hover:bg-neutral-800 px-8 py-6 text-base"
                 >
-                  <Link href="/portfolio">
-                    Посмотреть портфолио
+                  <Link href="/projects">
+                    Посмотреть проекты
                   </Link>
                 </Button>
               </div>

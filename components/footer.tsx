@@ -5,22 +5,21 @@ import { Logo } from '@/components/logo';
 export function Footer() {
   const navigation = {
     services: [
-      { name: 'Веб-разработка', href: '#web-development' },
-      { name: 'Мобильная разработка', href: '#mobile-development' },
-      { name: 'Облачные решения', href: '#cloud-solutions' },
-      { name: 'Консалтинг', href: '#contact' },
+      { name: 'Веб-разработка', href: '/#web-development' },
+      { name: 'Мобильная разработка', href: '/#mobile-development' },
+      { name: 'Облачные решения', href: '/#cloud-solutions' },
+      { name: 'Консалтинг', href: '/#contact' },
     ],
     company: [
       { name: 'О нас', href: '/about' },
-      { name: 'Портфолио', href: '/portfolio' },
-      { name: 'Блог', href: '/blog' },
       { name: 'Карьера', href: '/careers' },
+      { name: 'Проекты', href: '/projects' },
     ],
     support: [
       { name: 'Документация', href: '#' },
       { name: 'FAQ', href: '/faq' },
-      { name: 'Поддержка', href: '#contact' },
-      { name: 'Контакты', href: '#contact' },
+      { name: 'Поддержка', href: '/#contact' },
+      { name: 'Контакты', href: '/#contact' },
     ],
     legal: [
       { name: 'Политика конфиденциальности', href: '/privacy' },
@@ -30,10 +29,10 @@ export function Footer() {
   };
 
   const socialLinks = [
-    { name: 'Telegram', icon: 'simple-icons:telegram', href: '#', color: 'hover:text-[#0088cc]' },
-    { name: 'WhatsApp', icon: 'simple-icons:whatsapp', href: '#', color: 'hover:text-[#25D366]' },
-    { name: 'GitHub', icon: 'simple-icons:github', href: '#', color: 'hover:text-[#181717] dark:hover:text-white' },
-    { name: 'LinkedIn', icon: 'simple-icons:linkedin', href: '#', color: 'hover:text-[#0A66C2]' },
+    { name: 'Telegram', icon: 'simple-icons:telegram', href: 'https://t.me/NGSOFT_bot', color: 'hover:text-[#0088cc]' },
+    { name: 'WhatsApp', icon: 'simple-icons:whatsapp', href: 'https://wa.me/79256822620', color: 'hover:text-[#25D366]' },
+    { name: 'GitHub', icon: 'simple-icons:github', href: 'https://github.com/vaces8v/ng-soft-landing', color: 'hover:text-[#181717] dark:hover:text-white' },
+    { name: 'VK', icon: 'simple-icons:vk', href: 'https://vk.com/ng_soft', color: 'hover:text-[#181717] dark:hover:text-white' },
   ];
 
   return (
@@ -61,14 +60,14 @@ export function Footer() {
                 {/* Social Links */}
                 <div className="flex gap-3">
                   {socialLinks.map((social, index) => (
-                    <a
+                    <Link
                       key={social.name}
                       href={social.href}
                       className={`w-10 h-10 rounded-lg bg-neutral-100 dark:bg-neutral-800 flex items-center justify-center transition-colors ${social.color}`}
                       aria-label={social.name}
                     >
                       <Icon icon={social.icon} className="h-5 w-5" />
-                    </a>
+                    </Link>
                   ))}
                 </div>
               </div>
@@ -131,14 +130,31 @@ export function Footer() {
               </ul>
             </div>
 
-            {/* Newsletter */}
+            {/* Contact Info */}
             <div>
               <h3 className="text-sm font-semibold text-neutral-900 dark:text-white mb-4">
-                Подписка
+                Контакты
               </h3>
-              <p className="text-sm text-neutral-600 dark:text-neutral-400 mb-4">
-                Получайте новости и обновления
-              </p>
+              <ul className="space-y-3">
+                <li className="flex items-start gap-2">
+                  <Icon icon="lucide:mail" className="h-4 w-4 text-neutral-600 dark:text-neutral-400 mt-0.5 flex-shrink-0" />
+                  <a href="mailto:feedback@ng-soft.ru" className="text-sm text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors">
+                    feedback@ng-soft.ru
+                  </a>
+                </li>
+                <li className="flex items-start gap-2">
+                  <Icon icon="lucide:phone" className="h-4 w-4 text-neutral-600 dark:text-neutral-400 mt-0.5 flex-shrink-0" />
+                  <a href="tel:+74956822620" className="text-sm text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors">
+                    +7 (495) 682-26-20
+                  </a>
+                </li>
+                <li className="flex items-start gap-2">
+                  <Icon icon="lucide:map-pin" className="h-4 w-4 text-neutral-600 dark:text-neutral-400 mt-0.5 flex-shrink-0" />
+                  <span className="text-sm text-neutral-600 dark:text-neutral-400">
+                    1-я Мытищинская улица, 28с1, Москва, 129626
+                  </span>
+                </li>
+              </ul>
             </div>
           </div>
         </div>
