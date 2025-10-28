@@ -262,12 +262,12 @@ export function ApplicationsViewer({ vacancyId }: ApplicationsViewerProps) {
               Вы уверены, что хотите отклонить эту заявку? Кандидат будет уведомлен об отклонении.
             </DialogDescription>
           </DialogHeader>
-          <DialogFooter className="gap-2 sm:gap-0">
+          <DialogFooter className="gap-2 space-x-1 sm:gap-0">
             <Button variant="outline" onClick={handleRejectCancel}>
               Отмена
             </Button>
             <Button variant="destructive" onClick={handleRejectConfirm}>
-              <Icon icon="lucide:x" className="h-4 w-4 mr-2" />
+              <Icon icon="lucide:x" className="h-4 w-4" />
               Отклонить
             </Button>
           </DialogFooter>
