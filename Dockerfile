@@ -6,9 +6,10 @@ FROM base AS deps
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
-# Copy package files
+# Copy package files and prisma schema for postinstall
 COPY package.json package-lock.json* ./
-RUN npm ci
+COPY prisma ./prisma
+RUN npm ci --legacy-peer-deps
 
 # Development stage
 FROM base AS development

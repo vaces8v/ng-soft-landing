@@ -7,185 +7,111 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Header } from '@/components/header';
 import { Footer } from '@/components/footer';
+import { Drawer, DrawerContent, DrawerHeader, DrawerTitle, DrawerDescription, DrawerClose } from '@/components/ui/drawer';
 
 const projects = [
   {
     id: 1,
-    title: 'Корпоративная CRM-система',
-    category: 'enterprise',
-    categoryName: 'Корпоративное ПО',
-    description: 'Комплексная CRM-система для управления клиентами и продажами с интеграцией 1С и IP-телефонии',
-    image: 'lucide:building-2',
-    technologies: ['React', 'Node.js', 'PostgreSQL', 'Redis'],
-    year: '2024',
-    duration: '6 месяцев',
-    team: '8 специалистов',
-    link: '#',
-    stats: {
-      users: '500+',
-      efficiency: '+65%',
-      roi: '18 мес'
-    }
+    title: 'Личный кабинет для ОАО «Волгограднефтемаш»',
+    category: 'web',
+    categoryName: 'Веб-разработка',
+    description: 'Личный кабинет для управления профилем и документами',
+    image: 'lucide:user-circle',
+    projectImage: '/projects/image1.png',
+    technologies: ['WordPress', 'MySQL'],
+    link: 'https://lk.vnm.ru/main/',
+    fullDescription: 'Разработан удобный личный кабинет для сотрудников и партнеров ОАО «Волгограднефтемаш» с возможностью управления профилем, документами и доступом к информации.',
+    challenge: 'Требовалось создать интуитивный интерфейс для работы с документами и обеспечить безопасность доступа к конфиденциальной информации.',
+    solution: 'Использовали WordPress с кастомными плагинами для управления документами, реализовали систему ролей и прав доступа, интегрировали с корпоративной системой.',
+    results: ['Удобный интерфейс управления документами', 'Безопасный доступ к информации', 'Интеграция с корпоративными системами']
   },
   {
     id: 2,
-    title: 'Интернет-магазин электроники',
+    title: 'Интернет-магазин для ООО «Торговый Дом Магистраль»',
     category: 'web',
     categoryName: 'Веб-разработка',
-    description: 'Высоконагруженный маркетплейс с системой рекомендаций и интеграцией платежных систем',
-    image: 'lucide:shopping-cart',
-    technologies: ['Next.js', 'TypeScript', 'Stripe', 'AWS'],
-    year: '2024',
-    duration: '4 месяца',
-    team: '6 специалистов',
-    link: '#',
-    stats: {
-      orders: '10K+',
-      conversion: '+45%',
-      uptime: '99.9%'
-    }
+    description: 'Полнофункциональный интернет-магазин с каталогом товаров и системой заказов',
+    image: 'lucide:shopping-bag',
+    projectImage: '/projects/image2.png',
+    technologies: ['WordPress', 'MySQL'],
+    link: 'https://tdmmag.ru/',
+    fullDescription: 'Создан современный интернет-магазин для ООО «Торговый Дом Магистраль» с полным каталогом товаров, системой управления заказами и интеграцией платежных систем.',
+    challenge: 'Необходимо было создать удобный каталог товаров, обеспечить быстрый поиск и интегрировать платежные системы.',
+    solution: 'Использовали WordPress с WooCommerce, оптимизировали производительность, интегрировали популярные платежные системы и системы доставки.',
+    results: ['Каталог товаров', 'Увеличение заказов', 'Интеграция с платежными системами']
   },
   {
     id: 3,
-    title: 'Мобильный банк',
-    category: 'mobile',
-    categoryName: 'Мобильные приложения',
-    description: 'Безопасное банковское приложение с биометрией и P2P переводами',
-    image: 'lucide:smartphone',
-    technologies: ['React Native', 'Node.js', 'MongoDB'],
-    year: '2023',
-    duration: '8 месяцев',
-    team: '10 специалистов',
-    link: '#',
-    stats: {
-      users: '50K+',
-      rating: '4.8★',
-      transactions: '1M+'
-    }
+    title: 'Интернет-магазин для ООО «МОССТАЛЬ»',
+    category: 'web',
+    categoryName: 'Веб-разработка',
+    description: 'Интернет-магазин для продажи строительных материалов и металлопроката',
+    image: 'lucide:shopping-bag',
+    projectImage: '/projects/image3.png ',
+    technologies: ['WordPress', 'MySQL'],
+    link: '',
+    fullDescription: 'Разработан специализированный интернет-магазин для ООО «МОССТАЛЬ» с каталогом строительных материалов, системой расчета стоимости и доставки.',
+    challenge: 'Требовалось создать удобный каталог с фильтрацией по характеристикам, реализовать систему расчета доставки и интегрировать с системой управления складом.',
+    solution: 'Использовали WordPress с расширенными плагинами для фильтрации, реализовали калькулятор доставки, интегрировали с системой управления складом.',
+    results: ['Каталог товаров', 'Увеличение выручки', 'Автоматизация расчета доставки']
   },
   {
     id: 4,
-    title: 'AI-помощник для поддержки',
-    category: 'ai',
-    categoryName: 'AI & ML',
-    description: 'Интеллектуальный чат-бот с обработкой естественного языка и машинным обучением',
-    image: 'lucide:bot',
-    technologies: ['Python', 'TensorFlow', 'FastAPI', 'OpenAI'],
-    year: '2024',
-    duration: '5 месяцев',
-    team: '5 специалистов',
-    link: '#',
-    stats: {
-      requests: '5K/day',
-      accuracy: '94%',
-      response: '< 2s'
-    }
+    title: 'Сайт для ООО «КА-ТРАНС»',
+    category: 'web',
+    categoryName: 'Веб-разработка',
+    description: 'Корпоративный сайт транспортной компании с информацией об услугах',
+    image: 'lucide:truck',
+    projectImage: '/projects/image4.png',
+    technologies: ['WordPress', 'MySQL'],
+    link: 'https://ka-trans.ru/',
+    fullDescription: 'Создан профессиональный корпоративный сайт для ООО «КА-ТРАНС» с информацией об услугах доставки, портфолио и формой обратной связи.',
+    challenge: 'Требовалось создать привлекательный сайт, который бы демонстрировал профессионализм компании и привлекал новых клиентов.',
+    solution: 'Использовали WordPress с красивыми шаблонами, оптимизировали для SEO, добавили форму заявки и интеграцию с CRM.',
+    results: ['Привлечение лидов', 'Улучшение видимости в поиске', 'Увеличение узнаваемости бренда']
   },
   {
     id: 5,
-    title: 'Платформа онлайн-обучения',
+    title: 'Интернет-магазин для ООО «ТПК Кристи»',
     category: 'web',
     categoryName: 'Веб-разработка',
-    description: 'LMS-платформа с вебинарами, тестированием и системой сертификации',
-    image: 'lucide:graduation-cap',
-    technologies: ['Vue.js', 'Laravel', 'MySQL', 'WebRTC'],
-    year: '2023',
-    duration: '7 месяцев',
-    team: '9 специалистов',
-    link: '#',
-    stats: {
-      students: '20K+',
-      courses: '500+',
-      completion: '78%'
-    }
+    description: 'Интернет-магазин для продажи кристаллов и минералов',
+    image: 'lucide:shopping-bag',
+    projectImage: '/projects/image5.png',
+    technologies: ['WordPress', 'MySQL'],
+    link: '',
+    fullDescription: 'Разработан красивый интернет-магазин для ООО «ТПК Кристи» с галереей изображений кристаллов, описанием свойств и системой заказов.',
+    challenge: 'Требовалось создать визуально привлекательный магазин с качественными фотографиями, удобной навигацией и системой фильтрации.',
+    solution: 'Использовали WordPress с оптимизацией для изображений, реализовали галерею с лайтбоксом, добавили детальные фильтры по характеристикам.',
+    results: ['Каталог товаров', 'Увеличение заказов', 'Улучшение видимости в поиске']
   },
   {
     id: 6,
-    title: 'Система складского учета',
-    category: 'enterprise',
-    categoryName: 'Корпоративное ПО',
-    description: 'WMS с автоматизацией инвентаризации и интеграцией со сканерами',
-    image: 'lucide:warehouse',
-    technologies: ['Angular', '.NET', 'SQL Server', 'SignalR'],
-    year: '2023',
-    duration: '9 месяцев',
-    team: '7 специалистов',
-    link: '#',
-    stats: {
-      warehouses: '15',
-      items: '100K+',
-      accuracy: '99.5%'
-    }
-  },
-  {
-    id: 7,
-    title: 'Приложение для фитнеса',
-    category: 'mobile',
-    categoryName: 'Мобильные приложения',
-    description: 'Персональный тренер в кармане с планами тренировок и трекингом питания',
-    image: 'lucide:activity',
-    technologies: ['Flutter', 'Firebase', 'HealthKit'],
-    year: '2024',
-    duration: '3 месяца',
-    team: '4 специалиста',
-    link: '#',
-    stats: {
-      users: '30K+',
-      workouts: '500K+',
-      rating: '4.9★'
-    }
-  },
-  {
-    id: 8,
-    title: 'Облачное хранилище',
-    category: 'cloud',
-    categoryName: 'Облачные решения',
-    description: 'Корпоративное файловое хранилище с шифрованием и совместной работой',
-    image: 'lucide:cloud',
-    technologies: ['React', 'Go', 'MinIO', 'Kubernetes'],
-    year: '2023',
-    duration: '6 месяцев',
-    team: '8 специалистов',
-    link: '#',
-    stats: {
-      storage: '10TB+',
-      users: '1K+',
-      speed: '100MB/s'
-    }
-  },
-  {
-    id: 9,
-    title: 'IoT-платформа для умного дома',
-    category: 'iot',
-    categoryName: 'IoT',
-    description: 'Система управления умным домом с голосовым управлением и автоматизацией',
-    image: 'lucide:home',
-    technologies: ['React', 'MQTT', 'Node.js', 'Zigbee'],
-    year: '2024',
-    duration: '10 месяцев',
-    team: '12 специалистов',
-    link: '#',
-    stats: {
-      devices: '50+',
-      homes: '2K+',
-      automation: '95%'
-    }
+    title: 'Сайт для транспортной компании «Полярная Стрела»',
+    category: 'web',
+    categoryName: 'Веб-разработка',
+    description: 'Корпоративный сайт с информацией об услугах доставки и отслеживанием грузов',
+    image: 'lucide:map-pin',
+    projectImage: '/projects/image6.png',
+    technologies: ['WordPress', 'MySQL'],
+    link: 'https://polarstar.su/',
+    fullDescription: 'Создан профессиональный сайт для транспортной компании «Полярная Стрела» с информацией об услугах, маршрутах доставки и системой отслеживания грузов.',
+    challenge: 'Требовалось создать сайт, который бы демонстрировал надежность компании и позволял клиентам отслеживать свои грузы в реальном времени.',
+    solution: 'Использовали WordPress с интеграцией системы отслеживания, добавили интерактивную карту маршрутов, реализовали форму расчета стоимости доставки.',
+    results: ['Система отслеживания грузов', 'Увеличение клиентской базы', 'Улучшение коммуникации с клиентами']
   },
 ];
 
 const categories = [
   { id: 'all', name: 'Все проекты', icon: 'lucide:grid-3x3' },
   { id: 'web', name: 'Веб-разработка', icon: 'lucide:code-2' },
-  { id: 'mobile', name: 'Мобильные', icon: 'lucide:smartphone' },
-  { id: 'enterprise', name: 'Корпоративное ПО', icon: 'lucide:building' },
-  { id: 'cloud', name: 'Облачные', icon: 'lucide:cloud' },
-  { id: 'ai', name: 'AI & ML', icon: 'lucide:brain' },
-  { id: 'iot', name: 'IoT', icon: 'lucide:cpu' },
 ];
 
 export default function ProjectsPage() {
   const [activeCategory, setActiveCategory] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
+  const [selectedProject, setSelectedProject] = useState<typeof projects[0] | null>(null);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   const filteredProjects = projects.filter((project) => {
     const matchesCategory = activeCategory === 'all' || project.category === activeCategory;
@@ -340,22 +266,31 @@ export default function ProjectsPage() {
                     transition={{ duration: 0.3, delay: index * 0.05 }}
                     className="group relative flex flex-col rounded-2xl bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 hover:border-neutral-400 dark:hover:border-neutral-600 transition-all duration-300 overflow-hidden hover:shadow-lg"
                   >
-                    {/* Project Icon/Image */}
-                    <div className="relative p-8 pb-6 bg-neutral-50 dark:bg-neutral-800/50">
-                      <div className="flex items-start justify-between mb-4">
-                        <div className="w-16 h-16 rounded-xl bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                          <Icon icon={project.image} className="h-8 w-8 text-neutral-700 dark:text-neutral-300" />
+                    {/* Project Image Background */}
+                    <div className="relative h-48 bg-neutral-100 dark:bg-neutral-800 overflow-hidden">
+                      {project.projectImage ? (
+                        <>
+                          <img
+                            src={project.projectImage}
+                            alt={project.title}
+                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                          />
+                          {/* Overlay */}
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+                        </>
+                      ) : (
+                        <div className="w-full h-full bg-gradient-to-br from-neutral-200 to-neutral-300 dark:from-neutral-700 dark:to-neutral-800 flex items-center justify-center">
+                          <Icon icon={project.image} className="h-16 w-16 text-neutral-400 dark:text-neutral-600" />
                         </div>
-                        <span className="text-xs font-medium text-neutral-500 dark:text-neutral-400 px-3 py-1 rounded-full bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800">
-                          {project.year}
-                        </span>
-                      </div>
-
-                      {/* Category Badge */}
-                      <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800">
-                        <span className="text-xs font-medium text-neutral-700 dark:text-neutral-300">
-                          {project.categoryName}
-                        </span>
+                      )}
+                      
+                      {/* Category Badge - Positioned on image */}
+                      <div className="absolute top-4 left-4">
+                        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/90 dark:bg-neutral-900/90 backdrop-blur-sm border border-white/20 dark:border-neutral-700/20">
+                          <span className="text-xs font-medium text-neutral-700 dark:text-neutral-300">
+                            {project.categoryName}
+                          </span>
+                        </div>
                       </div>
                     </div>
 
@@ -370,55 +305,20 @@ export default function ProjectsPage() {
                       <p className="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed mb-6">
                         {project.description}
                       </p>
-
-                      {/* Stats */}
-                      <div className="grid grid-cols-3 gap-4 mb-6 pb-6 border-b border-neutral-200 dark:border-neutral-800">
-                        {Object.entries(project.stats).map(([key, value], idx) => (
-                          <div key={idx}>
-                            <div className="text-base font-bold text-neutral-900 dark:text-white">
-                              {value}
-                            </div>
-                            <div className="text-xs text-neutral-500 dark:text-neutral-400 capitalize">
-                              {key}
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-
-                      {/* Project Info */}
-                      <div className="space-y-2 mb-6">
-                        <div className="flex items-center gap-2 text-xs text-neutral-600 dark:text-neutral-400">
-                          <Icon icon="lucide:clock" className="h-3.5 w-3.5" />
-                          <span>{project.duration}</span>
-                        </div>
-                        <div className="flex items-center gap-2 text-xs text-neutral-600 dark:text-neutral-400">
-                          <Icon icon="lucide:users" className="h-3.5 w-3.5" />
-                          <span>{project.team}</span>
-                        </div>
-                      </div>
-
-                      {/* Technologies */}
-                      <div className="flex flex-wrap gap-2">
-                        {project.technologies.map((tech, idx) => (
-                          <span
-                            key={idx}
-                            className="text-xs px-2.5 py-1 rounded-md bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 border border-neutral-200 dark:border-neutral-700"
-                          >
-                            {tech}
-                          </span>
-                        ))}
-                      </div>
                     </div>
 
                     {/* View Project Link */}
                     <div className="px-8 pb-8">
-                      <Link
-                        href={project.link}
-                        className="inline-flex items-center gap-2 text-sm font-medium text-neutral-900 dark:text-white hover:gap-3 transition-all group/link"
+                      <button
+                        onClick={() => {
+                          setSelectedProject(project);
+                          setIsDrawerOpen(true);
+                        }}
+                        className="inline-flex items-center gap-2 text-sm font-medium text-neutral-900 dark:text-white hover:gap-3 transition-all group/link cursor-pointer"
                       >
                         <span>Подробнее</span>
                         <Icon icon="lucide:arrow-right" className="h-4 w-4" />
-                      </Link>
+                      </button>
                     </div>
 
                     {/* Hover Border Effect */}
@@ -491,6 +391,129 @@ export default function ProjectsPage() {
         </section>
       </main>
 
+      {/* Project Details Drawer */}
+      <Drawer direction='right' open={isDrawerOpen} onOpenChange={setIsDrawerOpen}>
+        <DrawerContent className="bg-white dark:bg-neutral-900 flex flex-col">
+          {selectedProject && (
+            <>
+              <DrawerHeader className="border-b border-neutral-200 dark:border-neutral-800 sticky top-0 bg-white dark:bg-neutral-900 z-10">
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex-1">
+                    <DrawerTitle className="text-2xl font-bold text-neutral-900 dark:text-white mb-2">
+                      {selectedProject.title}
+                    </DrawerTitle>
+                    <DrawerDescription className="text-base text-neutral-600 dark:text-neutral-400">
+                      {selectedProject.categoryName}
+                    </DrawerDescription>
+                  </div>
+                  <DrawerClose className="text-neutral-500 hover:text-neutral-700 dark:hover:text-neutral-300 transition-colors flex-shrink-0">
+                    <Icon icon="lucide:x" className="h-6 w-6" />
+                  </DrawerClose>
+                </div>
+              </DrawerHeader>
+
+              <div className="overflow-y-auto flex-1">
+                <div className="p-6 space-y-8">
+                  {/* Project Image */}
+                  {selectedProject.projectImage && (
+                    <div className="w-full h-48 rounded-xl overflow-hidden bg-neutral-100 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700">
+                      <img 
+                        src={selectedProject.projectImage} 
+                        alt={selectedProject.title}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  )}
+
+                  {/* Project Category */}
+                  <div className="flex items-center gap-4">
+                    <div className="w-16 h-16 rounded-xl bg-neutral-100 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 flex items-center justify-center">
+                      <Icon icon={selectedProject.image} className="h-8 w-8 text-neutral-700 dark:text-neutral-300" />
+                    </div>
+                    <div>
+                      <p className="text-xs text-neutral-600 dark:text-neutral-400 mb-1 uppercase tracking-wide">Категория</p>
+                      <p className="text-base font-semibold text-neutral-900 dark:text-white">{selectedProject.categoryName}</p>
+                    </div>
+                  </div>
+
+                  {/* Main Description */}
+                  <div>
+                    <h3 className="text-lg font-semibold text-neutral-900 dark:text-white mb-3">О проекте</h3>
+                    <p className="text-base text-neutral-600 dark:text-neutral-400 leading-relaxed">
+                      {selectedProject.fullDescription}
+                    </p>
+                  </div>
+
+                  {/* Challenge */}
+                  <div>
+                    <h3 className="text-lg font-semibold text-neutral-900 dark:text-white mb-3 flex items-center gap-2">
+                      <Icon icon="lucide:alert-circle" className="h-5 w-5 text-orange-500" />
+                      Задача
+                    </h3>
+                    <p className="text-base text-neutral-600 dark:text-neutral-400 leading-relaxed">
+                      {selectedProject.challenge}
+                    </p>
+                  </div>
+
+                  {/* Solution */}
+                  <div>
+                    <h3 className="text-lg font-semibold text-neutral-900 dark:text-white mb-3 flex items-center gap-2">
+                      <Icon icon="lucide:lightbulb" className="h-5 w-5 text-yellow-500" />
+                      Решение
+                    </h3>
+                    <p className="text-base text-neutral-600 dark:text-neutral-400 leading-relaxed">
+                      {selectedProject.solution}
+                    </p>
+                  </div>
+
+                  {/* Results */}
+                  <div>
+                    <h3 className="text-lg font-semibold text-neutral-900 dark:text-white mb-3 flex items-center gap-2">
+                      <Icon icon="lucide:check-circle-2" className="h-5 w-5 text-green-500" />
+                      Результаты
+                    </h3>
+                    <ul className="space-y-2">
+                      {selectedProject.results.map((result, idx) => (
+                        <li key={idx} className="flex items-start gap-3">
+                          <Icon icon="lucide:check" className="h-5 w-5 text-green-500 flex-shrink-0 mt-0.5" />
+                          <span className="text-base text-neutral-600 dark:text-neutral-400">{result}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  {/* CTA Buttons */}
+                  <div className="pt-4 space-y-3">
+                    {selectedProject.link && (
+                      <Button
+                        asChild
+                        size="lg"
+                        className="w-full bg-neutral-900 hover:bg-neutral-800 dark:bg-white dark:hover:bg-neutral-100 text-white dark:text-neutral-900"
+                      >
+                        <Link href={selectedProject.link} target="_blank" rel="noopener noreferrer">
+                          Посетить сайт проекта
+                          <Icon icon="lucide:external-link" className="ml-2 h-5 w-5" />
+                        </Link>
+                      </Button>
+                    )}
+                    <Button
+                      asChild
+                      size="lg"
+                      variant="outline"
+                      className="w-full border-neutral-300 dark:border-neutral-700 hover:bg-neutral-100 dark:hover:bg-neutral-800"
+                    >
+                      <Link href="/#contact">
+                        Обсудить похожий проект
+                        <Icon icon="lucide:arrow-right" className="ml-2 h-5 w-5" />
+                      </Link>
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            </>
+          )}
+        </DrawerContent>
+      </Drawer>
       <Footer />
     </>
   );

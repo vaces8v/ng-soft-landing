@@ -80,19 +80,19 @@ export function ContactSection() {
     {
       icon: 'lucide:mail',
       title: 'Email',
-      value: 'info@ng-soft.ru',
-      link: 'mailto:info@ng-soft.ru',
+      value: 'feedback@ng-soft.ru',
+      link: 'mailto:feedback@ng-soft.ru',
     },
     {
       icon: 'lucide:phone',
       title: 'Телефон',
-      value: '+7 (XXX) XXX-XX-XX',
-      link: 'tel:+7XXXXXXXXXX',
+      value: '+7 (495) 682-26-20',
+      link: 'tel:+74956822620',
     },
     {
       icon: 'lucide:map-pin',
       title: 'Адрес',
-      value: 'Россия, Москва',
+      value: '1-я Мытищинская улица, 28с1',
       link: null,
     },
   ];
