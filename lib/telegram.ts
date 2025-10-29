@@ -143,6 +143,72 @@ export function botDeepLink(code: string) {
   return `https://t.me/${BOT_USERNAME}?start=${encodeURIComponent(code)}`;
 }
 
+export async function setBotCommands() {
+  if (!API_BASE) return null;
+  const commands = [
+    { command: 'start', description: 'Запуск и привязка аккаунта' },
+    { command: 'link', description: 'Привязать аккаунт по коду' },
+    { command: 'me', description: 'Проверить привязку' },
+    { command: 'notify', description: 'Вкл/выкл уведомления: /notify apps on|off' },
+    { command: 'help', description: 'Список команд и панель' },
+  ];
+  return api('setMyCommands', { commands });
+}
+
+export async function setChatMenuButtonToCommands() {
+  if (!API_BASE) return null;
+  return api('setChatMenuButton', { menu_button: { type: 'commands' } });
+}
+
+export async function ensureBotUX() {
+  try {
+    await Promise.allSettled([setBotCommands(), setChatMenuButtonToCommands()]);
+  } catch {}
+}
+
+export function buildHelpText() {
+  const lines = [
+    '<b>Список команд</b>\n',
+    '<b>/start &lt;код&gt;</b> — привязать аккаунт по коду',
+    '<b>/link &lt;код&gt;</b> — альтернатива привязки',
+    '<b>/me</b> — показать статус привязки',
+    '<b>/notify apps on|off</b> — уведомления о заявках',
+    '<b>/notify jobs on|off</b> — уведомления об откликах',
+    '<b>/help</b> — панель команд',
+    '\nНажмите кнопки ниже для быстрых действий.',
+  ];
+  return lines.join('\n');
+}
+
+export function helpKeyboard(): InlineKeyboardMarkup {
+  return {
+    inline_keyboard: [
+      [
+        { text: 'Привязка', callback_data: 'help:link' },
+        { text: 'Мой статус', callback_data: 'help:me' },
+      ],
+      [
+        { text: 'Уведомления', callback_data: 'help:notify' },
+        { text: 'Панель уведомлений', callback_data: 'help:panel' },
+      ],
+    ],
+  };
+}
+
+export function buildNotifyPanelKeyboard(enabledApps: boolean, enabledJobs: boolean): InlineKeyboardMarkup {
+  return {
+    inline_keyboard: [
+      [
+        { text: `Заявки: ${enabledApps ? 'Выкл' : 'Вкл'}`, callback_data: `notify:apps:${enabledApps ? 'off' : 'on'}` },
+        { text: `Вакансии: ${enabledJobs ? 'Выкл' : 'Вкл'}`, callback_data: `notify:jobs:${enabledJobs ? 'off' : 'on'}` },
+      ],
+      [
+        { text: 'Назад', callback_data: 'help:back' },
+      ],
+    ],
+  };
+}
+
 function escapeHtml(str: string) {
   return str
     .replace(/&/g, '&amp;')

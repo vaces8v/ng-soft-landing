@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
-import { answerCallbackQuery, buildApplicationMessage, editMessageText, sendTelegramMessage, statusLabel } from '@/lib/telegram';
+import { answerCallbackQuery, buildApplicationMessage, editMessageText, sendTelegramMessage, statusLabel, ensureBotUX, buildHelpText, helpKeyboard, buildNotifyPanelKeyboard } from '@/lib/telegram';
 
 function ok() {
   return NextResponse.json({ ok: true });
@@ -33,6 +33,7 @@ export async function POST(req: NextRequest) {
     const text: string = msg.text || '';
 
     if (text.startsWith('/start')) {
+      await ensureBotUX();
       const parts = textParts(text);
       const code = parts[1] || '';
       if (!code) {
@@ -64,6 +65,7 @@ export async function POST(req: NextRequest) {
     }
 
     if (text.startsWith('/link')) {
+      await ensureBotUX();
       const parts = textParts(text);
       const code = parts[1] || '';
       if (!code) {
@@ -104,6 +106,13 @@ export async function POST(req: NextRequest) {
         chatId,
         `Вы привязаны как ${user.telegramUsername || 'без username'} (ID ${chatId})`
       );
+      return ok();
+    }
+
+    if (text.startsWith('/help')) {
+      await ensureBotUX();
+      const help = buildHelpText();
+      await sendTelegramMessage(chatId, help, { parse_mode: 'HTML', reply_markup: helpKeyboard() });
       return ok();
     }
 
@@ -160,6 +169,51 @@ export async function POST(req: NextRequest) {
       await answerCallbackQuery(cq.id, `Статус: ${statusLabel(newStatus)}`);
       const text = buildApplicationMessage(app);
       await editMessageText(fromChatId, messageId, text);
+      return ok();
+    }
+
+    if (data === 'help:panel' || data === 'help:back') {
+      const help = buildHelpText();
+      await editMessageText(fromChatId, messageId, help, helpKeyboard());
+      await answerCallbackQuery(cq.id);
+      return ok();
+    }
+
+    if (data === 'help:link') {
+      const msg = 'В админке нажмите «Получить код». Затем отправьте в чат с ботом: /start <КОД> (или /link <КОД>).';
+      await editMessageText(fromChatId, messageId, msg, helpKeyboard());
+      await answerCallbackQuery(cq.id);
+      return ok();
+    }
+
+    if (data === 'help:me') {
+      const info = `Вы привязаны как ${user.telegramUsername || 'без username'} (ID ${fromChatId})`;
+      await editMessageText(fromChatId, messageId, info, helpKeyboard());
+      await answerCallbackQuery(cq.id);
+      return ok();
+    }
+
+    if (data === 'help:notify') {
+      const info = `Настройки уведомлений\nЗаявки: ${user.notifyNewApplications ? 'вкл' : 'выкл'}\nВакансии: ${user.notifyJobApplications ? 'вкл' : 'выкл'}`;
+      await editMessageText(fromChatId, messageId, info, buildNotifyPanelKeyboard(!!user.notifyNewApplications, !!user.notifyJobApplications));
+      await answerCallbackQuery(cq.id);
+      return ok();
+    }
+
+    if (data.startsWith('notify:')) {
+      const [, channel, action] = data.split(':');
+      const value = action === 'on';
+      if (channel !== 'apps' && channel !== 'jobs') {
+        await answerCallbackQuery(cq.id, 'Неизвестный канал');
+        return ok();
+      }
+      const updated = await prisma.user.update({
+        where: { id: user.id },
+        data: channel === 'apps' ? { notifyNewApplications: value } : { notifyJobApplications: value },
+      });
+      const info = `Настройки уведомлений\nЗаявки: ${updated.notifyNewApplications ? 'вкл' : 'выкл'}\nВакансии: ${updated.notifyJobApplications ? 'вкл' : 'выкл'}`;
+      await editMessageText(fromChatId, messageId, info, buildNotifyPanelKeyboard(!!updated.notifyNewApplications, !!updated.notifyJobApplications));
+      await answerCallbackQuery(cq.id, 'Обновлено');
       return ok();
     }
 

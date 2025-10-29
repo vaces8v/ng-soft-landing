@@ -4,14 +4,11 @@ import { useEffect, useState } from 'react';
 import { Icon } from '@iconify/react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from '@/components/ui/dialog';
 import { useTheme } from 'next-themes';
 import {
-  LineChart,
-  Line,
   AreaChart,
   Area,
-  BarChart,
-  Bar,
   PieChart,
   Pie,
   Cell,
@@ -73,9 +70,11 @@ export function AdminDashboard({ user }: AdminDashboardProps) {
     code?: string | null;
     deepLink?: string | null;
     expiresAt?: string | null;
+    botUsername?: string | null;
   } | null>({ linked: false });
   const [tgLoading, setTgLoading] = useState(false);
   const [tgGenerating, setTgGenerating] = useState(false);
+  const [isInstrOpen, setInstrOpen] = useState(false);
 
   useEffect(() => {
     fetchStats();
@@ -190,24 +189,27 @@ export function AdminDashboard({ user }: AdminDashboardProps) {
       </div>
 
       <div className="mb-6">
-        <div className="flex items-center justify-between bg-white dark:bg-neutral-900 rounded-xl border border-neutral-200 dark:border-neutral-800 p-4">
-          <div className="flex items-center gap-3">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 bg-white dark:bg-neutral-900 rounded-xl border border-neutral-200 dark:border-neutral-800 p-4">
+          <div className="flex items-center gap-3 w-full">
             <div className={`w-9 h-9 rounded-lg flex items-center justify-center ${tg?.linked ? 'bg-green-100 dark:bg-green-900/30' : 'bg-neutral-100 dark:bg-neutral-800'}`}>
-              <Icon icon={tg?.linked ? 'lucide:check' : 'lucide:bot'} className={`h-5 w-5 ${tg?.linked ? 'text-green-600' : 'text-neutral-600 dark:text-neutral-300'}`} />
+              <Icon icon="mdi:telegram" className={`h-5 w-5 ${tg?.linked ? 'text-green-600' : 'text-neutral-600 dark:text-neutral-300'}`} />
             </div>
-            <div>
+            <div className="min-w-0">
               <p className="text-sm text-neutral-600 dark:text-neutral-400">Telegram</p>
-              <p className="text-sm font-medium text-neutral-900 dark:text-white">
+              <p className="text-sm font-medium text-neutral-900 dark:text-white truncate">
                 {tgLoading ? 'Проверка…' : tg?.linked ? `Привязано ${tg.username ? `@${tg.username}` : ''}` : 'Не привязано'}
               </p>
               {tg?.code && (
-                <p className="text-xs text-neutral-500 dark:text-neutral-400">
+                <p className="text-xs text-neutral-500 dark:text-neutral-400 break-all">
                   Код: {tg.code}{tg.expiresAt ? ` (до ${new Date(tg.expiresAt).toLocaleTimeString('ru-RU')})` : ''}
                 </p>
               )}
             </div>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 sm:flex-nowrap flex-wrap">
+            <Button size="sm" variant="outline" onClick={() => setInstrOpen(true)}>
+              Инструкция
+            </Button>
             <Button size="sm" onClick={generateTgCode} disabled={tgGenerating} className="gap-2">
               {tgGenerating && <Icon icon="lucide:loader-2" className="h-4 w-4 animate-spin" />}
               Получить код
@@ -217,6 +219,47 @@ export function AdminDashboard({ user }: AdminDashboardProps) {
             </Button>
           </div>
         </div>
+        <Dialog open={isInstrOpen} onOpenChange={setInstrOpen}>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>Подключение Telegram-бота</DialogTitle>
+              <DialogDescription>Пошаговая инструкция для привязки аккаунта Telegram к админке.</DialogDescription>
+            </DialogHeader>
+            <div className="space-y-3 text-sm">
+              <div>
+                <p className="font-medium">1. Откройте бота</p>
+                <p>
+                  Перейдите в бот {tg?.botUsername ? (
+                    <a className="text-blue-600 hover:underline" href={`https://t.me/${tg.botUsername}`} target="_blank" rel="noreferrer">@{tg.botUsername}</a>
+                  ) : (
+                    'в Telegram'
+                  )}.
+                </p>
+              </div>
+              <div>
+                <p className="font-medium">2. Получите код</p>
+                <p>В админке нажмите «Получить код». Откроется диалог с ботом или скопируйте код вручную слева, рядом с иконкой бота.</p>
+              </div>
+              <div>
+                <p className="font-medium">3. Отправьте команду боту</p>
+                <p>Отправьте в чат с ботом: <span className="font-mono bg-neutral-100 dark:bg-neutral-800 px-1.5 py-0.5 rounded">/start {tg?.code || '<КОД>'}</span></p>
+                <p className="text-neutral-500">Альтернатива: <span className="font-mono bg-neutral-100 dark:bg-neutral-800 px-1.5 py-0.5 rounded">/link {tg?.code || '<КОД>'}</span></p>
+              </div>
+              <div>
+                <p className="font-medium">4. Завершите привязку</p>
+                <p>Вернитесь в админку и нажмите «Проверить». Статус должен стать «Привязано».</p>
+              </div>
+            </div>
+            <DialogFooter>
+              {tg?.deepLink && (
+                <Button onClick={() => {
+                  try { window.open(tg.deepLink as string, '_blank', 'noopener,noreferrer'); } catch {}
+                }}>Открыть бота</Button>
+              )}
+              <Button variant="outline" onClick={() => setInstrOpen(false)}>Закрыть</Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
       </div>
 
       {isLoading ? (

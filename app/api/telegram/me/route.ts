@@ -9,6 +9,7 @@ export async function GET() {
     if (!session?.user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
 
     const userId = (session.user as any).id as string;
+    const botUsername = process.env.TELEGRAM_BOT_USERNAME || null;
     const user = await prisma.user.findUnique({
       where: { id: userId },
       select: {
@@ -33,6 +34,7 @@ export async function GET() {
       code: user.telegramAuthCode,
       expiresAt: user.telegramAuthCodeExpiresAt,
       deepLink,
+      botUsername,
     });
   } catch (e) {
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
