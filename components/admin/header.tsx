@@ -76,6 +76,11 @@ export function AdminHeader({ user }: AdminHeaderProps) {
           {/* User Menu */}
           <div className="flex items-center gap-3">
             <ThemeToggle />
+            <Link href="/admin/settings" className="md:hidden">
+              <Button variant="ghost" size="sm" className="gap-2">
+                <Icon icon="lucide:settings" className="h-4 w-4" />
+              </Button>
+            </Link>
             
             <div className="hidden md:flex items-center gap-3 pl-3 border-l border-neutral-200 dark:border-neutral-800">
               <div className="text-right">
@@ -86,6 +91,12 @@ export function AdminHeader({ user }: AdminHeaderProps) {
                   {user.email}
                 </p>
               </div>
+              <Link href="/admin/settings">
+                <Button variant="outline" size="sm" className="gap-2">
+                  <Icon icon="lucide:settings" className="h-4 w-4" />
+                  Настройки
+                </Button>
+              </Link>
               <Button
                 variant="outline"
                 size="sm"

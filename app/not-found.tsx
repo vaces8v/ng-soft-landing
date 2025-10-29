@@ -45,7 +45,7 @@ export default function NotFound() {
           </div>
 
           <Link
-            href="#services"
+            href="/#services"
             className="inline-flex items-center gap-1 text-xs font-medium text-neutral-500 transition-colors hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white"
           >
             <span>Подробнее об услугах</span>

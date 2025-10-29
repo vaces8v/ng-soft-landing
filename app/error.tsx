@@ -93,7 +93,7 @@ export default function Error({
 
           <div className="flex flex-wrap justify-center gap-3">
             <a
-              href="#contact"
+              href="/#contact"
               className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-colors text-sm text-neutral-700 dark:text-neutral-300"
             >
               <Icon icon="lucide:mail" className="w-4 h-4" />
@@ -101,7 +101,7 @@ export default function Error({
             </a>
 
             <a
-              href="#faq"
+              href="/faq"
               className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-colors text-sm text-neutral-700 dark:text-neutral-300"
             >
               <Icon icon="lucide:help-circle" className="w-4 h-4" />
