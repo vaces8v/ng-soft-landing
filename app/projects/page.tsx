@@ -371,7 +371,7 @@ export default function ProjectsPage() {
                 >
                   <Link href="/#contact">
                     Обсудить проект
-                    <Icon icon="lucide:arrow-right" className="ml-2 h-5 w-5" />
+                    <Icon icon="lucide:arrow-right" className="h-5 w-5" />
                   </Link>
                 </Button>
 
@@ -492,7 +492,7 @@ export default function ProjectsPage() {
                       >
                         <Link href={selectedProject.link} target="_blank" rel="noopener noreferrer">
                           Посетить сайт проекта
-                          <Icon icon="lucide:external-link" className="ml-2 h-5 w-5" />
+                          <Icon icon="lucide:external-link" className="h-5 w-5" />
                         </Link>
                       </Button>
                     )}
@@ -504,7 +504,7 @@ export default function ProjectsPage() {
                     >
                       <Link href="/#contact">
                         Обсудить похожий проект
-                        <Icon icon="lucide:arrow-right" className="ml-2 h-5 w-5" />
+                        <Icon icon="lucide:arrow-right" className="h-5 w-5" />
                       </Link>
                     </Button>
                   </div>

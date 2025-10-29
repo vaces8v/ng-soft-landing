@@ -78,7 +78,6 @@ export function buildApplicationMessage(app: { id: string; name: string; phone: 
   const created = app.createdAt ? new Date(app.createdAt) : new Date();
   const lines = [
     `🆕 Новая заявка`,
-    `ID: <code>${app.id}</code>`,
     `Имя: <b>${escapeHtml(app.name)}</b>`,
     `Телефон: <b>${escapeHtml(app.phone)}</b>`,
     `Email: <b>${escapeHtml(app.email)}</b>`,
@@ -91,12 +90,11 @@ export function buildApplicationMessage(app: { id: string; name: string; phone: 
   return lines.join('\n');
 }
 
-export function buildJobApplicationMessage(app: { id: string; vacancyId: string; name: string; phone: string; email: string; resume?: string | null; coverLetter: string; status: string; createdAt?: Date }) {
+export function buildJobApplicationMessage(app: { id: string; vacancyId: string; name: string; phone: string; email: string; resume?: string | null; coverLetter: string; status: string; createdAt?: Date }, vacancyTitle?: string) {
   const created = app.createdAt ? new Date(app.createdAt) : new Date();
   const lines = [
     `🧑‍💼 Отклик на вакансию`,
-    `ID: <code>${app.id}</code>`,
-    `Вакансия: <code>${app.vacancyId}</code>`,
+    `Вакансия: <b>${escapeHtml(vacancyTitle || '')}</b>`,
     `Имя: <b>${escapeHtml(app.name)}</b>`,
     `Телефон: <b>${escapeHtml(app.phone)}</b>`,
     `Email: <b>${escapeHtml(app.email)}</b>`,
@@ -134,7 +132,12 @@ export async function notifyNewApplication(app: { id: string; name: string; phon
 }
 
 export async function notifyJobApplication(app: { id: string; vacancyId: string; name: string; phone: string; email: string; resume?: string | null; coverLetter: string; status: string; createdAt?: Date }) {
-  const text = buildJobApplicationMessage(app);
+  let vacancyTitle: string | undefined;
+  try {
+    const vacancy = await prisma.vacancy.findUnique({ where: { id: app.vacancyId }, select: { title: true } });
+    vacancyTitle = vacancy?.title || undefined;
+  } catch {}
+  const text = buildJobApplicationMessage(app, vacancyTitle);
   await broadcastToAdmins(text, { type: 'jobApp' });
 }
 

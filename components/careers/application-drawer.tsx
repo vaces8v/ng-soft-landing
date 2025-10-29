@@ -165,12 +165,12 @@ export function ApplicationDrawer({ vacancy, open, onOpenChange }: ApplicationDr
             >
               {isSubmitting ? (
                 <>
-                  <Icon icon="lucide:loader-2" className="h-5 w-5 mr-2 animate-spin" />
+                  <Icon icon="lucide:loader-2" className="h-5 w-5 animate-spin" />
                   Отправка...
                 </>
               ) : (
                 <>
-                  <Icon icon="lucide:send" className="h-5 w-5 mr-2" />
+                  <Icon icon="lucide:send" className="h-5 w-5" />
                   Отправить отклик
                 </>
               )}

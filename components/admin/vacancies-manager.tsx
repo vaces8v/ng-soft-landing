@@ -474,12 +474,12 @@ export function VacanciesManager() {
               Вы уверены, что хотите удалить эту вакансию? Это действие нельзя отменить.
             </DialogDescription>
           </DialogHeader>
-          <DialogFooter className="gap-2 sm:gap-0">
+          <DialogFooter className="gap-2 space-x-2 sm:gap-0">
             <Button variant="outline" onClick={handleDeleteCancel}>
               Отмена
             </Button>
             <Button variant="destructive" onClick={handleDeleteConfirm}>
-              <Icon icon="lucide:trash-2" className="h-4 w-4 mr-2" />
+              <Icon icon="lucide:trash-2" className="h-4 w-4" />
               Удалить
             </Button>
           </DialogFooter>

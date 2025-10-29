@@ -210,7 +210,7 @@ export default function AboutPage() {
                 >
                   <Link href="#contact">
                     Связаться с нами
-                    <Icon icon="lucide:arrow-right" className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+                    <Icon icon="lucide:arrow-right" className="h-5 w-5 transition-transform group-hover:translate-x-1" />
                   </Link>
                 </Button>
 

@@ -134,7 +134,7 @@ export default function Home() {
                 >
                   <Link href="#contact">
                     Начать проект
-                    <Icon icon="lucide:arrow-right" className="ml-2 h-4 sm:h-5 w-4 sm:w-5 transition-transform group-hover:translate-x-1" />
+                    <Icon icon="lucide:arrow-right" className="h-4 sm:h-5 w-4 sm:w-5 transition-transform group-hover:translate-x-1" />
                   </Link>
                 </Button>
 
@@ -146,7 +146,7 @@ export default function Home() {
                 >
                   <Link href="#services">
                     Наши услуги
-                    <Icon icon="lucide:chevron-down" className="ml-2 h-4 sm:h-5 w-4 sm:w-5 transition-transform group-hover:translate-y-1" />
+                    <Icon icon="lucide:chevron-down" className="h-4 sm:h-5 w-4 sm:w-5 transition-transform group-hover:translate-y-1" />
                   </Link>
                 </Button>
               </div>

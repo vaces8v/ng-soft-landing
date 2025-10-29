@@ -55,7 +55,7 @@ export function CareersClient({ vacancies }: CareersClientProps) {
                     className="group/btn bg-neutral-900 hover:bg-neutral-800 dark:bg-white dark:hover:bg-neutral-100 text-white dark:text-neutral-900"
                   >
                     Откликнуться
-                    <Icon icon="lucide:arrow-right" className="ml-2 h-4 w-4 transition-transform group-hover/btn:translate-x-1" />
+                    <Icon icon="lucide:arrow-right" className="h-4 w-4 transition-transform group-hover/btn:translate-x-1" />
                   </Button>
                 </div>
 

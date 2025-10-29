@@ -1,12 +1,15 @@
 import { Icon } from '@iconify/react';
-import Link from 'next/link';
-import { Button } from '@/components/ui/button';
+import { unstable_noStore as noStore } from 'next/cache';
 import { Header } from '@/components/header';
 import { Footer } from '@/components/footer';
 import { CareersClient } from '@/components/careers/careers-client';
 import type { Vacancy } from '@/lib/vacancies-store';
 
+export const runtime = 'nodejs';
+export const dynamic = 'force-dynamic';
+
 async function getVacancies(): Promise<Vacancy[]> {
+  noStore();
   try {
     // Используем прямой импорт prisma для SSR
     const { prisma } = await import('@/lib/prisma');
