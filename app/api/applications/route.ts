@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { auth } from '@/auth';
 import { z } from 'zod';
+import { notifyNewApplication } from '@/lib/telegram';
 
 const applicationSchema = z.object({
   name: z.string().min(2),
@@ -65,6 +66,12 @@ export async function POST(req: NextRequest) {
     const application = await prisma.application.create({
       data: validatedData,
     });
+
+    try {
+      await notifyNewApplication(application);
+    } catch (e) {
+      console.error('Telegram notify error:', e);
+    }
 
     return NextResponse.json(application, { status: 201 });
   } catch (error) {

@@ -66,9 +66,20 @@ export function AdminDashboard({ user }: AdminDashboardProps) {
   const [activeIndex, setActiveIndex] = useState<number | undefined>(undefined);
   const { theme } = useTheme();
   const isDark = theme === 'dark';
+  const [tg, setTg] = useState<{
+    linked: boolean;
+    username?: string | null;
+    chatId?: string | null;
+    code?: string | null;
+    deepLink?: string | null;
+    expiresAt?: string | null;
+  } | null>({ linked: false });
+  const [tgLoading, setTgLoading] = useState(false);
+  const [tgGenerating, setTgGenerating] = useState(false);
 
   useEffect(() => {
     fetchStats();
+    fetchTelegram();
   }, []);
 
   const fetchStats = async () => {
@@ -82,6 +93,39 @@ export function AdminDashboard({ user }: AdminDashboardProps) {
       console.error('Error fetching stats:', error);
     } finally {
       setIsLoading(false);
+    }
+  };
+
+  const fetchTelegram = async () => {
+    setTgLoading(true);
+    try {
+      const res = await fetch('/api/telegram/me');
+      if (res.ok) {
+        const data = await res.json();
+        setTg(data);
+      } else {
+        setTg(null);
+      }
+    } finally {
+      setTgLoading(false);
+    }
+  };
+
+  const generateTgCode = async () => {
+    setTgGenerating(true);
+    try {
+      const res = await fetch('/api/telegram/link-code', { method: 'POST' });
+      if (res.ok) {
+        const data = await res.json();
+        setTg((prev) => ({ ...(prev || { linked: false }), code: data.code, deepLink: data.deepLink, expiresAt: data.expiresAt }));
+        if (data.deepLink) {
+          try {
+            window.open(data.deepLink, '_blank', 'noopener,noreferrer');
+          } catch {}
+        }
+      }
+    } finally {
+      setTgGenerating(false);
     }
   };
 
@@ -143,6 +187,36 @@ export function AdminDashboard({ user }: AdminDashboardProps) {
         <p className="text-neutral-600 dark:text-neutral-400">
           Обзор активности и статистики заявок
         </p>
+      </div>
+
+      <div className="mb-6">
+        <div className="flex items-center justify-between bg-white dark:bg-neutral-900 rounded-xl border border-neutral-200 dark:border-neutral-800 p-4">
+          <div className="flex items-center gap-3">
+            <div className={`w-9 h-9 rounded-lg flex items-center justify-center ${tg?.linked ? 'bg-green-100 dark:bg-green-900/30' : 'bg-neutral-100 dark:bg-neutral-800'}`}>
+              <Icon icon={tg?.linked ? 'lucide:check' : 'lucide:bot'} className={`h-5 w-5 ${tg?.linked ? 'text-green-600' : 'text-neutral-600 dark:text-neutral-300'}`} />
+            </div>
+            <div>
+              <p className="text-sm text-neutral-600 dark:text-neutral-400">Telegram</p>
+              <p className="text-sm font-medium text-neutral-900 dark:text-white">
+                {tgLoading ? 'Проверка…' : tg?.linked ? `Привязано ${tg.username ? `@${tg.username}` : ''}` : 'Не привязано'}
+              </p>
+              {tg?.code && (
+                <p className="text-xs text-neutral-500 dark:text-neutral-400">
+                  Код: {tg.code}{tg.expiresAt ? ` (до ${new Date(tg.expiresAt).toLocaleTimeString('ru-RU')})` : ''}
+                </p>
+              )}
+            </div>
+          </div>
+          <div className="flex items-center gap-2">
+            <Button size="sm" onClick={generateTgCode} disabled={tgGenerating} className="gap-2">
+              {tgGenerating && <Icon icon="lucide:loader-2" className="h-4 w-4 animate-spin" />}
+              Получить код
+            </Button>
+            <Button size="sm" variant="outline" onClick={fetchTelegram} disabled={tgLoading}>
+              Проверить
+            </Button>
+          </div>
+        </div>
       </div>
 
       {isLoading ? (

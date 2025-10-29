@@ -14,6 +14,13 @@ model User {
   password  String
   name      String
   role      String   @default("admin")
+  telegramChatId              String?  @unique
+  telegramUsername            String?
+  telegramLinkedAt            DateTime?
+  telegramAuthCode            String?
+  telegramAuthCodeExpiresAt   DateTime?
+  notifyNewApplications       Boolean  @default(true)
+  notifyJobApplications       Boolean  @default(true)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
