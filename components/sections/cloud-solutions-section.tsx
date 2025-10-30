@@ -1,16 +1,15 @@
 'use client';
 
 import { Icon } from '@iconify/react';
-import { useRef } from 'react';
-import { AnimatedBeam } from '@/components/ui/shadcn-io/animated-beam';
+import { useEffect, useRef, useState } from 'react';
 
 const CloudIcon = ({ icon, label }: { icon: string; label: string }) => {
   return (
     <div className="flex flex-col items-center gap-2">
-      <div className="relative w-16 h-16 rounded-xl bg-gradient-to-br from-neutral-50/70 to-neutral-100/70 dark:from-neutral-800/70 dark:to-neutral-900/70 backdrop-blur-3xl flex items-center justify-center border border-neutral-300/50 dark:border-neutral-700/50 shadow-2xl">
-        <div className="absolute inset-0 rounded-xl bg-white/60 dark:bg-black/60 backdrop-blur-3xl"></div>
-        <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-white/80 to-transparent dark:from-white/10 dark:to-transparent backdrop-blur-2xl"></div>
-        <Icon icon={icon} className="h-8 w-8 text-neutral-700 dark:text-neutral-300 relative z-10 drop-shadow-lg" />
+      <div className="relative w-16 h-16 rounded-xl bg-gradient-to-br from-neutral-50/70 to-neutral-100/70 dark:from-neutral-800/70 dark:to-neutral-900/70 backdrop-blur-0 md:backdrop-blur-3xl flex items-center justify-center border border-neutral-300/50 dark:border-neutral-700/50 shadow-none md:shadow-2xl">
+        <div className="absolute inset-0 rounded-xl bg-white/60 dark:bg-black/60 backdrop-blur-0 md:backdrop-blur-3xl hidden md:block"></div>
+        <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-white/80 to-transparent dark:from-white/10 dark:to-transparent backdrop-blur-0 md:backdrop-blur-2xl hidden md:block"></div>
+        <Icon icon={icon} className="h-8 w-8 text-neutral-700 dark:text-neutral-300 relative z-10 drop-shadow-none md:drop-shadow-lg" />
       </div>
       <span className="text-xs text-neutral-600 dark:text-neutral-400 font-medium text-center">
         {label}
@@ -18,6 +17,77 @@ const CloudIcon = ({ icon, label }: { icon: string; label: string }) => {
     </div>
   );
 };
+
+type StaticLinesProps = { height: number };
+
+function CloudDiagramStaticLines({ height }: StaticLinesProps) {
+  // Normalize to percentage-based coordinates matching the DOM layout
+  const W = 100;
+  const H = height;
+  
+  // Icon size is 64px (w-16 h-16), so center offset is 32px
+  const iconRadius = 32;
+  
+  // X positions (percentage)
+  const x50 = 50;  // left-1/2
+  const x15 = 15;  // left-[15%]
+  const x85 = 85;  // left-[85%]
+  const x90 = 90;  // left-[90%]
+  
+  // Y positions (pixels from top or bottom)
+  const yClient = iconRadius;              // top-0 + center
+  const yApiGateway = 100 + iconRadius;    // top-[100px] + center
+  const yServer = 220 + iconRadius;        // top-[220px] + center
+  // Mobile: bottom-[20px], Desktop (500px): bottom-[60px]
+  const bottomOffset = height === 440 ? 20 : 60;
+  const yBottom = H - bottomOffset - iconRadius;
+  
+  // Node positions
+  const Client = { x: x50, y: yClient };
+  const ApiGateway = { x: x50, y: yApiGateway };
+  const Server = { x: x50, y: yServer };
+  const Database = { x: x15, y: yBottom };
+  const Cache = { x: x50, y: yBottom };
+  const Storage = { x: x85, y: yBottom };
+  const CDN = { x: x90, y: yApiGateway };
+  
+  // Straight line path
+  const line = (a: { x: number; y: number }, b: { x: number; y: number }) => 
+    `M ${a.x},${a.y} L ${b.x},${b.y}`;
+  
+  const paths = [
+    line(Client, ApiGateway),
+    line(ApiGateway, Server),
+    line(Server, Database),
+    line(Server, Cache),
+    line(Server, Storage),
+    line(Client, CDN),
+    line(CDN, ApiGateway),
+  ];
+
+  return (
+    <svg
+      fill="none"
+      width="100%"
+      height="100%"
+      xmlns="http://www.w3.org/2000/svg"
+      className="pointer-events-none absolute left-0 top-0"
+      viewBox={`0 0 ${W} ${H}`}
+      preserveAspectRatio="none"
+    >
+      {paths.map((d, i) => (
+        <path
+          key={i}
+          d={d}
+          strokeWidth={0.2}
+          strokeLinecap="round"
+          className="stroke-neutral-300 dark:stroke-neutral-700"
+          strokeOpacity="0.5"
+        />
+      ))}
+    </svg>
+  );
+}
 
 export function CloudSolutionsSection() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -28,6 +98,18 @@ export function CloudSolutionsSection() {
   const cacheRef = useRef<HTMLDivElement>(null);
   const storageRef = useRef<HTMLDivElement>(null);
   const cdnRef = useRef<HTMLDivElement>(null);
+  const [inView, setInView] = useState(false);
+
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setInView(entry.isIntersecting),
+      { root: null, rootMargin: '100px 0px', threshold: 0.05 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <section className="relative py-24 bg-gradient-to-b from-white via-neutral-50 to-white dark:from-neutral-950 dark:via-neutral-900 dark:to-neutral-950 overflow-hidden">
@@ -109,7 +191,8 @@ export function CloudSolutionsSection() {
           >
             <div
               ref={containerRef}
-              className="relative w-full h-[500px] flex items-center justify-center"
+              className="relative w-full h-[440px] md:h-[500px] flex items-center justify-center"
+              style={{ contentVisibility: 'auto', containIntrinsicSize: '500px 500px', contain: 'layout paint style' }}
             >
               {/* Client */}
               <div
@@ -138,7 +221,7 @@ export function CloudSolutionsSection() {
               {/* Database */}
               <div
                 ref={databaseRef}
-                className="absolute bottom-[60px] left-[15%]"
+                className="absolute bottom-[20px] md:bottom-[60px] left-[15%] -translate-x-1/2"
               >
                 <CloudIcon icon="lucide:database" label="Database" />
               </div>
@@ -146,7 +229,7 @@ export function CloudSolutionsSection() {
               {/* Cache */}
               <div
                 ref={cacheRef}
-                className="absolute bottom-[60px] left-1/2 -translate-x-1/2"
+                className="absolute bottom-[20px] md:bottom-[60px] left-1/2 -translate-x-1/2"
               >
                 <CloudIcon icon="lucide:zap" label="Cache" />
               </div>
@@ -154,7 +237,7 @@ export function CloudSolutionsSection() {
               {/* Storage */}
               <div
                 ref={storageRef}
-                className="absolute bottom-[60px] right-[15%]"
+                className="absolute bottom-[20px] md:bottom-[60px] left-[85%] -translate-x-1/2"
               >
                 <CloudIcon icon="lucide:hard-drive" label="Storage" />
               </div>
@@ -162,54 +245,22 @@ export function CloudSolutionsSection() {
               {/* CDN */}
               <div
                 ref={cdnRef}
-                className="absolute top-[100px] right-[10%]"
+                className="absolute top-[100px] left-[90%] -translate-x-1/2"
               >
                 <CloudIcon icon="lucide:globe" label="CDN" />
               </div>
 
               {/* Static Beams - Monochrome style */}
-              <AnimatedBeam
-                containerRef={containerRef}
-                fromRef={clientRef}
-                toRef={apiGatewayRef}
-                curvature={0}
-              />
-              <AnimatedBeam
-                containerRef={containerRef}
-                fromRef={apiGatewayRef}
-                toRef={serverRef}
-                curvature={0}
-              />
-              <AnimatedBeam
-                containerRef={containerRef}
-                fromRef={serverRef}
-                toRef={databaseRef}
-                curvature={20}
-              />
-              <AnimatedBeam
-                containerRef={containerRef}
-                fromRef={serverRef}
-                toRef={cacheRef}
-                curvature={0}
-              />
-              <AnimatedBeam
-                containerRef={containerRef}
-                fromRef={serverRef}
-                toRef={storageRef}
-                curvature={-20}
-              />
-              <AnimatedBeam
-                containerRef={containerRef}
-                fromRef={clientRef}
-                toRef={cdnRef}
-                curvature={30}
-              />
-              <AnimatedBeam
-                containerRef={containerRef}
-                fromRef={cdnRef}
-                toRef={apiGatewayRef}
-                curvature={-20}
-              />
+              {inView && (
+                <>
+                  <div className="absolute inset-0 block md:hidden">
+                    <CloudDiagramStaticLines height={440} />
+                  </div>
+                  <div className="absolute inset-0 hidden md:block">
+                    <CloudDiagramStaticLines height={500} />
+                  </div>
+                </>
+              )}
             </div>
           </div>
         </div>
@@ -248,3 +299,4 @@ export function CloudSolutionsSection() {
     </section>
   );
 }
+
